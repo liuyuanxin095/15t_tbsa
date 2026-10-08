@@ -150,6 +150,7 @@ table.w td.num,table.w th.num{text-align:right;font-variant-numeric:tabular-nums
     <div class="tools">
       <label class="whosel" id="whoWrap"><span>填寫人</span><select id="whoSel" aria-label="目前填寫人"></select></label>
       <button class="btn" id="bRoster" type="button">組員名單</button>
+      <button class="btn" id="bSheet" type="button">同步設定</button>
       <span class="mode" id="mode">僅存本機</span>
       <span class="saved" id="saved" aria-live="polite">自動儲存</span>
       <button class="btn pri" id="bCopy" type="button">複製成文字</button>
@@ -161,6 +162,12 @@ table.w td.num,table.w th.num{text-align:right;font-variant-numeric:tabular-nums
     <div class="lb">組員名單<small>一行一個名字。存好之後,上方「填寫人」選單就能選到。換人填寫時,先在上方選自己的名字,再開始填。</small></div>
     <textarea id="rosterBox" aria-label="組員名單" placeholder="王小明&#10;陳小華&#10;林小美" style="height:120px;overflow:auto;resize:vertical"></textarea>
     <div class="row"><button class="btn pri" id="bRosterSave" type="button">儲存名單</button><button class="btn" id="bRosterClose" type="button">關閉</button></div>
+  </div>
+  <div id="sheetPanel" class="panel" hidden>
+    <div class="lb">同步到 Google 試算表<small>貼上 Apps Script 部署後的「網頁應用程式網址」,大家的內容就會存進同一份試算表。設定只存在這個瀏覽器;要讓所有人自動套用,請把網址寫進檔案開頭的 SHEET_URL。</small></div>
+    <label class="fld" style="margin-top:8px"><span class="lb">網頁應用程式網址</span><input type="text" id="sheetUrl" placeholder="https://script.google.com/macros/s/…/exec"></label>
+    <label class="fld" style="margin-top:8px"><span class="lb">通關密碼(選填,要和 Apps Script 裡的 CODE 一樣)</span><input type="text" id="sheetCode"></label>
+    <div class="row"><button class="btn pri" id="bSheetSave" type="button">儲存並重新載入</button><button class="btn" id="bSheetOff" type="button">停用同步</button><button class="btn" id="bSheetClose" type="button">關閉</button></div>
   </div>
   <div id="panel" class="panel" hidden>
     <div class="lb">備份 / 還原<small>資料只存在這個瀏覽器。換裝置或清除瀏覽資料前,請先複製備份代碼存起來。</small></div>
@@ -181,6 +188,7 @@ table.w td.num,table.w th.num{text-align:right;font-variant-numeric:tabular-nums
 
 <script>
 (function(){
+var SHEET_URL='https://script.google.com/macros/s/AKfycbzaS_naudhlfp07W-BzUyaMbsDMr2aDx5sxNR09aQ0imG4ZGpZMFz0nc1T5bekYGAJB/exec',SHEET_CODE=''; // 部署 Apps Script 後,把網址貼在第一個引號內,全組就自動同步
 var KEY='tbsa15-form-v1';
 var $=function(s,r){return (r||document).querySelector(s)};
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
@@ -241,7 +249,7 @@ function flush(k){
   if(writing[k]){timers[k]=setTimeout(function(){flush(k)},300);return}
   delete dirty[k];writing[k]=1;
   var a=A[k]||{by:ME.id,at:Date.now()};
-  coll.doc(k).set({v:S[k]===undefined?'':S[k],by:a.by,at:a.at}).then(function(){done(k)},function(e){
+  coll.doc(k).set({v:S[k]===undefined?'':S[k],by:a.by,at:a.at,l:labelOf(k),t:fmtFull(a.at)}).then(function(){done(k)},function(e){
     done(k);toast(e&&e.code==='invalid_argument'?'你目前沒有編輯權限,內容沒有同步':'同步失敗,稍後會再試');
   });
 }
@@ -313,11 +321,66 @@ function onSnap(snap){
     persist();
   });
 }
+function fmtFull(ms){var d=new Date(ms||Date.now());return d.getFullYear()+'/'+pad(d.getMonth()+1)+'/'+pad(d.getDate())+' '+pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds())}
+var LBL=null;
+function labelOf(k){
+  if(!LBL){
+    LBL={c_topic:'封面 題目',c_num:'封面 參賽編號',c_team:'封面 團隊名稱',cat_o:'封面 參賽類別 其他',cat_other:'封面 參賽類別 其他說明',roster:'組員名單',pts:'STEP 3 定位圖',seg_lbl:'STEP 3 自訂區隔變數名稱',prodname:'STEP 3 商品/服務名稱',target:'STEP 3 目標市場',feat:'STEP 3 功能/特色',posstmt:'STEP 3 定位聲明',ax_t:'STEP 3 定位圖 上方軸',ax_b:'STEP 3 定位圖 下方軸',ax_l:'STEP 3 定位圖 左方軸',ax_r:'STEP 3 定位圖 右方軸',
+      o_name:'STEP 5 企劃案名稱',o_goal:'STEP 5 目的/目標',o_eff:'STEP 5 效益',o_what:'STEP 5 內容要點',o_who:'STEP 5 執行團隊',o_cost:'STEP 5 所需經費',o_how:'STEP 5 實施方式'};
+    CATS.forEach(function(c,i){LBL['cat'+i]='封面 參賽類別 '+c});
+    STEPS.forEach(function(st){(st.secs||[]).forEach(function(sc){sc.f.forEach(function(f){LBL[f.k]=st.n+' '+f.l})})});
+    SW.forEach(function(x){LBL['sw_'+x[0]]='STEP 2 SWOT '+x[1]});
+    ['a','b','c'].forEach(function(c){SEGV.forEach(function(r){LBL['seg_'+c+'_'+r[0]]='STEP 3 市場區隔'+c.toUpperCase()+' '+r[1]});LBL['seg_'+c+'_x']='STEP 3 市場區隔'+c.toUpperCase()+' 自訂變數'});
+    P7.forEach(function(q){LBL['p7_'+q[0]]='STEP 4 7Ps '+q[1]});
+    AIDAS.forEach(function(a,i){var n=a[0].split(' / ')[0];LBL['ai'+i+'_act']='STEP 4 '+n+' 行動溝通活動';LBL['ai'+i+'_goal']='STEP 4 '+n+' 成果目標';LBL['ai'+i+'_bud']='STEP 4 '+n+' 預算';LBL['ai'+i+'_note']='STEP 4 '+n+' 備註'});
+  }
+  return LBL[k]||k;
+}
+
+/* ---------- Google Sheet backend (Apps Script web app) ---------- */
+function sheetCfg(){var u=SHEET_URL,c=SHEET_CODE;try{u=localStorage.getItem('tbsa15-sheet')||u;c=localStorage.getItem('tbsa15-sheetcode')||c}catch(e){}return {url:(u||'').trim(),code:(c||'').trim()}}
+var sPend=[],sWait=[],sTimer=null,sPrev={},sCfg=null;
+function sheetPush(k,d){
+  return new Promise(function(res,rej){
+    var it=d.del?{k:k,del:1}:{k:k,v:d.v,by:d.by||'',at:d.at,l:d.l,t:d.t};
+    sPend.push(it);sWait.push([res,rej]);clearTimeout(sTimer);sTimer=setTimeout(sheetSend,900);
+  });
+}
+function sheetSend(){
+  var items=sPend,w=sWait;sPend=[];sWait=[];
+  fetch(sCfg.url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({code:sCfg.code,items:items})})
+   .then(function(r){return r.json()}).then(function(j){
+     if(j&&j.ok)w.forEach(function(x){x[0]()});else{var e={code:j&&j.error==='code'?'code':'fail'};w.forEach(function(x){x[1](e)})}
+   },function(){w.forEach(function(x){x[1]({code:'fail'})})});
+}
+function sheetPull(){
+  if(document.hidden)return;
+  fetch(sCfg.url+(sCfg.url.indexOf('?')<0?'?':'&')+'code='+encodeURIComponent(sCfg.code)+'&t='+Date.now())
+   .then(function(r){return r.json()}).then(function(j){
+     if(j&&j.error){$('#saved').textContent=j.error==='code'?'通關密碼不正確':'同步失敗';return}
+     var data=(j&&j.data)||{},ids=Object.keys(data),ch=[];
+     Object.keys(sPrev).forEach(function(k){if(!data[k])ch.push({type:'removed',doc:{id:k}})});
+     sPrev=data;
+     if(!Object.keys(dirty).length&&!Object.keys(writing).length)$('#saved').textContent='已同步';
+     onSnap({docs:ids.map(function(k){return {id:k,exists:true,data:function(){return data[k]}}}),empty:!ids.length,docChanges:function(){return ch}});
+   },function(){$('#saved').textContent='同步失敗,稍後重試'});
+}
+function initSheet(cfg){
+  sCfg=cfg;CANW=true;CANADMIN=true;DB={sheet:1};
+  coll={doc:function(k){return {set:function(d){return sheetPush(k,d)},delete:function(){return sheetPush(k,{del:1})}}}};
+  var m=$('#mode');m.textContent='Google 試算表';m.className='mode on';m.title='內容會同步到共用的 Google 試算表';
+  $('#saved').textContent='同步中…';
+  sheetPull();setInterval(sheetPull,6000);
+  document.addEventListener('visibilitychange',function(){if(!document.hidden)sheetPull()});
+}
 function noShare(msg){
   WHY=msg;var m=$('#mode');m.textContent='僅存本機';m.className='mode';m.title=msg;fillWho();
 }
 function initShared(){
-  if(!(window.claude&&window.claude.use)){noShare('這個頁面不是在 Claude 裡開啟的(例如另存的檔案或單獨的網頁),無法使用共用資料。請從 Claude 的 artifact 連結開啟。');return}
+  if(!(window.claude&&window.claude.use)){
+    var cfg=sheetCfg();
+    if(cfg.url){initSheet(cfg);return}
+    noShare('尚未設定 Google 試算表同步。按上方「同步設定」貼上網址即可。');return}
   Promise.all([window.claude.use('user'),window.claude.use('db')]).then(function(r){
     var u=r[0],d=r[1];
     if(!u||!d){noShare('目前的開啟方式沒有提供共用資料功能。請在 Claude 網站或 App 內開啟這個 artifact,並重新整理頁面。');return}
@@ -579,6 +642,10 @@ document.addEventListener('click',function(e){
     case 'fillCost':var tot=sum();var nc=(S.o_cost?S.o_cost+'\n':'')+'行銷溝通預算合計 '+tot.toLocaleString('zh-TW')+' 元';$('#o_cost').value=nc;autosize($('#o_cost'));setField('o_cost',nc);break;
     case 'bCopy':copyText(toMarkdown(),'已複製,可貼到 Word 或 Google 文件');break;
     case 'bRoster':$('#rosterBox').value=roster().join('\n');$('#rosterPanel').hidden=!$('#rosterPanel').hidden;break;
+    case 'bSheet':var c0=sheetCfg();$('#sheetUrl').value=c0.url;$('#sheetCode').value=c0.code;$('#sheetPanel').hidden=!$('#sheetPanel').hidden;break;
+    case 'bSheetClose':$('#sheetPanel').hidden=true;break;
+    case 'bSheetSave':try{localStorage.setItem('tbsa15-sheet',$('#sheetUrl').value.trim());localStorage.setItem('tbsa15-sheetcode',$('#sheetCode').value.trim())}catch(x){}location.reload();break;
+    case 'bSheetOff':try{localStorage.setItem('tbsa15-sheet','');localStorage.setItem('tbsa15-sheetcode','')}catch(x){}SHEET_URL='';location.reload();break;
     case 'bRosterClose':$('#rosterPanel').hidden=true;break;
     case 'bRosterSave':
       var seen={},names=[];$('#rosterBox').value.split(/\r?\n/).forEach(function(x){x=x.trim();if(x&&!seen[x]){seen[x]=1;names.push(x)}});
