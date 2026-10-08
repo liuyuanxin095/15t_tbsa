@@ -1,0 +1,664 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>:root{color-scheme:light}body{margin:0}[hidden]{display:none!important}</style>
+<title>TBSA 企劃表單</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap">
+<style>
+/* Layout: sticky toolbar, step rail on the left (tabs on phones), one form sheet per step in the main column. */
+:root{
+  --bg:#eef1f6; --surface:#ffffff; --ink:#172033; --mute:#5b6678; --line:#d3dae6;
+  --head:#e6ebf3; --accent:#1d4e89; --on-accent:#ffffff; --accent-soft:#e1ebf7; --ok:#2e7d57; --warn:#b4571b;
+  --serif:"Noto Serif TC","Songti TC","PMingLiU",serif; --sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0e1420; --surface:#162033; --ink:#e5eaf3; --mute:#99a5b8; --line:#2a3752;
+  --head:#1d2a41; --accent:#86b6ef; --on-accent:#0e1a2e; --accent-soft:#1c2d4a; --ok:#6cc79a; --warn:#f0a06a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0e1420; --surface:#162033; --ink:#e5eaf3; --mute:#99a5b8; --line:#2a3752;
+  --head:#1d2a41; --accent:#86b6ef; --on-accent:#0e1a2e; --accent-soft:#1c2d4a; --ok:#6cc79a; --warn:#f0a06a; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.6;padding-inline:16px;padding-block:0 48px}
+button,input,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1180px;margin-inline:auto}
+header.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between;padding-block:12px;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:baseline;gap:10px;min-width:0}
+.brand b{font-family:var(--serif);font-size:18px;letter-spacing:.02em}
+.brand span{color:var(--mute);font-size:13px}
+.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.saved{font-size:13px;color:var(--mute);min-width:5.5em}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:6px 12px;cursor:pointer;font-size:14px}
+.btn:hover{border-color:var(--accent)}
+.btn.pri{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.btn.warn{color:var(--warn)}
+.btn.sm{padding:2px 9px;font-size:13px}
+.layout{display:grid;grid-template-columns:210px minmax(0,1fr);gap:24px;padding-top:20px;align-items:start}
+nav.rail{position:sticky;top:calc(64px + env(safe-area-inset-top,0px));display:flex;flex-direction:column;gap:4px}
+.tab{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;align-items:center;text-align:left;border:1px solid transparent;background:none;border-radius:8px;padding:8px 10px;cursor:pointer}
+.tab:hover{background:var(--surface)}
+.tab[aria-current="page"]{background:var(--surface);border-color:var(--line)}
+.tab .n{grid-row:span 2;font-size:12px;font-weight:700;background:var(--accent);color:var(--on-accent);border-radius:4px;padding:2px 6px;letter-spacing:.04em}
+.tab .t{font-size:14px;font-weight:500;line-height:1.3}
+.tab .pg{height:3px;background:var(--line);border-radius:2px;overflow:hidden;grid-column:2}
+.tab .pg i{display:block;height:100%;background:var(--ok);width:0}
+.sheet{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:24px;min-width:0}
+.sheet h1{font-family:var(--serif);font-size:26px;line-height:1.3;margin:0 0 6px;text-wrap:balance}
+.use{color:var(--mute);margin:0 0 20px;max-width:65ch;font-size:14px}
+.kicker{font-size:12px;letter-spacing:.14em;color:var(--accent);font-weight:700;margin-bottom:4px}
+.blk{margin-top:22px}
+.blk>h3{font-size:14px;margin:0 0 8px;background:var(--head);padding:5px 10px;border-radius:4px;letter-spacing:.04em}
+.grid{display:grid;gap:12px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.fld{display:flex;flex-direction:column;gap:4px;min-width:0}
+.lb{font-size:13px;font-weight:700}
+.lb small{display:block;font-weight:400;color:var(--mute);font-size:12px}
+input[type=text],textarea{width:100%;border:1px solid var(--line);background:var(--bg);border-radius:6px;padding:8px 10px;resize:vertical;line-height:1.55}
+textarea{overflow:hidden;resize:none}
+input[type=text]:focus,textarea:focus{background:var(--surface);border-color:var(--accent)}
+::placeholder{color:var(--mute);opacity:.65}
+.cats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px}
+.cat{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:6px;padding:8px 10px;cursor:pointer;background:var(--bg)}
+.cat:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
+.cat input{accent-color:var(--accent);width:16px;height:16px}
+.cat input[type=text]{border:0;border-bottom:1px solid var(--line);border-radius:0;padding:2px 4px;background:transparent}
+.toc{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px}
+.toc button{display:flex;flex-direction:column;gap:6px;text-align:left;border:1px solid var(--line);background:var(--bg);border-radius:8px;padding:12px;cursor:pointer}
+.toc button:hover{border-color:var(--accent)}
+.toc .n{font-size:12px;font-weight:700;color:var(--accent);letter-spacing:.08em}
+.toc .t{font-weight:500}
+.toc .pg{height:4px;background:var(--line);border-radius:2px;overflow:hidden}
+.toc .pg i{display:block;height:100%;background:var(--ok)}
+.toc .c{font-size:12px;color:var(--mute);font-variant-numeric:tabular-nums}
+.scroll{overflow-x:auto}
+table.t{border-collapse:collapse;width:100%;min-width:640px}
+table.t th,table.t td{border:1px solid var(--line);padding:6px;vertical-align:top}
+table.t th{background:var(--head);font-size:13px;text-align:left}
+table.t th.rh{width:130px}
+table.t th small{display:block;font-weight:400;color:var(--mute);font-size:11px}
+table.t textarea,table.t input[type=text]{border-color:transparent;background:transparent;padding:4px 6px}
+table.t textarea:focus,table.t input[type=text]:focus{border-color:var(--accent);background:var(--surface)}
+.swot{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.swot .hd{background:var(--head);border-radius:6px;padding:6px 10px;font-size:13px;font-weight:700;display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.swot .hd small{font-weight:400;color:var(--mute);font-size:12px;text-align:right}
+.swot .cell{display:flex;flex-direction:column;gap:6px;min-width:0}
+.swot .corner{font-size:12px;color:var(--mute);display:flex;flex-direction:column;justify-content:center;padding:6px 10px;border:1px dashed var(--line);border-radius:6px}
+.swot .x .hd{background:var(--accent-soft)}
+.map{position:relative;aspect-ratio:1/1;max-width:420px;width:100%;margin:12px auto;border:1px solid var(--line);background:var(--bg);border-radius:6px;touch-action:none;user-select:none}
+.map::before,.map::after{content:"";position:absolute;background:var(--line)}
+.map::before{left:50%;top:0;bottom:0;width:1px}.map::after{top:50%;left:0;right:0;height:1px}
+.ax{position:absolute;font-size:12px;color:var(--mute);max-width:40%;text-align:center;pointer-events:none}
+.ax.t{top:4px;left:50%;transform:translateX(-50%)}.ax.b{bottom:4px;left:50%;transform:translateX(-50%)}
+.ax.l{left:4px;top:50%;transform:translateY(-50%)}.ax.r{right:4px;top:50%;transform:translateY(-50%)}
+.dot{position:absolute;transform:translate(-50%,-50%);cursor:grab;display:flex;flex-direction:column;align-items:center;gap:2px;max-width:110px}
+.dot i{width:16px;height:16px;border-radius:50%;background:var(--mute);border:2px solid var(--surface);box-shadow:0 0 0 1px var(--mute)}
+.dot.me i{background:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.dot span{font-size:12px;background:var(--surface);padding:0 5px;border-radius:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:110px;border:1px solid var(--line)}
+.axes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.pts{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.pt{display:flex;gap:8px;align-items:center}
+.total{margin-top:10px;display:flex;gap:8px;align-items:baseline;justify-content:flex-end;font-variant-numeric:tabular-nums}
+.total b{font-size:18px;color:var(--accent)}
+.hint{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.pager{display:flex;justify-content:space-between;gap:12px;margin-top:28px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;margin-top:12px}
+.panel textarea{height:140px;overflow:auto;resize:vertical;font-family:ui-monospace,Menlo,monospace;font-size:12px}
+.panel .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:8px 16px;border-radius:6px;font-size:14px;z-index:9;max-width:90vw}
+.by{display:block;font-size:11px;color:var(--mute);line-height:1.4;min-height:0}
+.by:empty{display:none}
+table.t .by{padding:0 6px 2px}
+.whosel{display:flex;align-items:center;gap:6px;font-size:13px}
+.whosel select{border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:5px 8px;max-width:11em}
+.whosel.need select{border-color:var(--warn)}
+.mode{font-size:12px;border:1px solid var(--line);border-radius:99px;padding:1px 10px;color:var(--mute);white-space:nowrap}
+.mode.on{color:var(--ok);border-color:var(--ok)}
+.banner{background:var(--accent-soft);border-radius:6px;padding:8px 12px;margin:0 0 16px;font-size:14px}
+table.w{border-collapse:collapse;width:100%;min-width:480px}
+table.w th,table.w td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top;font-size:14px}
+table.w th{font-size:12px;color:var(--mute);font-weight:500}
+table.w td.num,table.w th.num{text-align:right;font-variant-numeric:tabular-nums}
+.chip{display:inline-block;font-size:12px;background:var(--accent-soft);border-radius:4px;padding:0 6px;margin:0 4px 2px 0;white-space:nowrap}
+.who-note{font-size:13px;color:var(--mute);margin:0 0 8px}
+.foot{margin-top:24px;font-size:12px;color:var(--mute);max-width:80ch}
+@media (max-width:860px){
+  .layout{grid-template-columns:minmax(0,1fr)}
+  nav.rail{position:static;flex-direction:row;overflow-x:auto;padding-bottom:4px}
+  .tab{min-width:150px;flex:none}
+  .g4{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:minmax(0,1fr)}
+  .axes{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:600px){
+  .g2{grid-template-columns:minmax(0,1fr)}.sheet{padding:16px}
+  .swot{grid-template-columns:minmax(0,1fr)}.swot .corner{display:none}
+  .brand span{display:none}
+}
+@media (prefers-reduced-motion:no-preference){.tab,.btn,.toc button{transition:border-color .15s,background .15s}}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header class="bar">
+    <div class="brand"><b>TBSA 企劃表單</b><span>第 15 屆全國大專創新企劃競賽</span></div>
+    <div class="tools">
+      <label class="whosel" id="whoWrap"><span>填寫人</span><select id="whoSel" aria-label="目前填寫人"></select></label>
+      <button class="btn" id="bRoster" type="button">組員名單</button>
+      <span class="mode" id="mode">僅存本機</span>
+      <span class="saved" id="saved" aria-live="polite">自動儲存</span>
+      <button class="btn pri" id="bCopy" type="button">複製成文字</button>
+      <button class="btn" id="bData" type="button">備份 / 還原</button>
+      <button class="btn warn" id="bReset" type="button">清空</button>
+    </div>
+  </header>
+  <div id="rosterPanel" class="panel" hidden>
+    <div class="lb">組員名單<small>一行一個名字。存好之後,上方「填寫人」選單就能選到。換人填寫時,先在上方選自己的名字,再開始填。</small></div>
+    <textarea id="rosterBox" aria-label="組員名單" placeholder="王小明&#10;陳小華&#10;林小美" style="height:120px;overflow:auto;resize:vertical"></textarea>
+    <div class="row"><button class="btn pri" id="bRosterSave" type="button">儲存名單</button><button class="btn" id="bRosterClose" type="button">關閉</button></div>
+  </div>
+  <div id="panel" class="panel" hidden>
+    <div class="lb">備份 / 還原<small>資料只存在這個瀏覽器。換裝置或清除瀏覽資料前,請先複製備份代碼存起來。</small></div>
+    <textarea id="dataBox" aria-label="備份代碼" placeholder="複製備份後代碼會出現在這裡。要還原時,把代碼貼在這裡再按「還原」。"></textarea>
+    <div class="row">
+      <button class="btn" id="bBackup" type="button">複製備份代碼</button>
+      <button class="btn pri" id="bRestore" type="button">還原貼上的代碼</button>
+      <button class="btn" id="bClosePanel" type="button">關閉</button>
+    </div>
+  </div>
+  <div class="layout">
+    <nav class="rail" id="rail" aria-label="表單步驟"></nav>
+    <main id="main" class="sheet"></main>
+  </div>
+  <p class="foot">本企劃表單為 WBSA 商務策劃師聯合會台灣辦事處所授權,僅提供「TBSA 商務企劃能力檢定」企劃學習之使用,非經授權勿用於他處。</p>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+(function(){
+var KEY='tbsa15-form-v1';
+var $=function(s,r){return (r||document).querySelector(s)};
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+
+/* ---------- state ---------- */
+var S={},A={};
+function load(){try{var r=localStorage.getItem(KEY);if(r)S=JSON.parse(r)||{};var b=localStorage.getItem(KEY+'-by');if(b)A=JSON.parse(b)||{}}catch(e){S={};A={}}}
+var saveT;
+function persist(){try{localStorage.setItem(KEY,JSON.stringify(S));localStorage.setItem(KEY+'-by',JSON.stringify(A))}catch(e){throw e}}
+function save(){
+  $('#saved').textContent='儲存中…';
+  clearTimeout(saveT);
+  saveT=setTimeout(function(){
+    try{persist();if(!DB)$('#saved').textContent='已自動儲存'}
+    catch(e){if(!DB)$('#saved').textContent='無法儲存,請用備份'}
+    renderRail();fillWho();
+  },350);
+}
+
+/* ---------- shared data + who wrote what ---------- */
+var WHY='正在確認是否能連上共用資料…';
+var DB=null,coll=null,ME={id:null,name:''},CANW=true,CANADMIN=false;
+var P={},dirty={},writing={},timers={},firstSnap=true;
+function pad(n){return n<10?'0'+n:''+n}
+function fmtAt(ms){if(!ms)return '';var d=new Date(ms);return (d.getMonth()+1)+'/'+d.getDate()+' '+pad(d.getHours())+':'+pad(d.getMinutes())}
+var CUR='';try{CUR=localStorage.getItem('tbsa15-me')||''}catch(e){}
+function nameOf(n){return n||'未選填寫人'}
+function roster(){return Array.isArray(S.roster)?S.roster:[]}
+function fillSelect(){
+  var sel=$('#whoSel');if(!sel)return;
+  var r=roster();if(CUR&&r.indexOf(CUR)<0)CUR='';
+  var h='<option value="">'+(r.length?'請選擇…':'先建立組員名單')+'</option>';
+  r.forEach(function(n){h+='<option value="'+esc(n)+'"'+(n===CUR?' selected':'')+'>'+esc(n)+'</option>'});
+  sel.innerHTML=h;$('#whoWrap').classList.toggle('need',!CUR);
+}
+var warned=false;
+function byText(k){var a=A[k];return a?nameOf(a.by)+' · '+fmtAt(a.at):''}
+function refreshBy(){
+  document.querySelectorAll('[data-by]').forEach(function(el){
+    var k=el.dataset.by;el.textContent=(S[k]===''||S[k]===undefined||S[k]===false)?'':byText(k);
+  });
+}
+function resolveNames(){return Promise.resolve()}
+function setField(k,v,delay){
+  S[k]=v;
+  if(k!=='roster'){
+    A[k]={by:CUR,at:Date.now()};
+    if(!CUR&&!warned){warned=true;toast('請先在上方「填寫人」選擇你的名字,這一欄才會記錄是誰填的')}
+    var el0=document.querySelector('[data-by="'+k+'"]');if(el0)el0.textContent=(v===''||v===false)?'':byText(k);
+  }
+  if(DB){if(k==='roster')A[k]={by:CUR,at:Date.now()};dirty[k]=1;
+    clearTimeout(timers[k]);timers[k]=setTimeout(function(){flush(k)},delay||700);
+    $('#saved').textContent='同步中…';
+  }
+  save();
+}
+function flush(k){
+  if(writing[k]){timers[k]=setTimeout(function(){flush(k)},300);return}
+  delete dirty[k];writing[k]=1;
+  var a=A[k]||{by:ME.id,at:Date.now()};
+  coll.doc(k).set({v:S[k]===undefined?'':S[k],by:a.by,at:a.at}).then(function(){done(k)},function(e){
+    done(k);toast(e&&e.code==='invalid_argument'?'你目前沒有編輯權限,內容沒有同步':'同步失敗,稍後會再試');
+  });
+}
+function done(k){
+  delete writing[k];
+  if(!Object.keys(dirty).length&&!Object.keys(writing).length)$('#saved').textContent='已同步';
+}
+function isFilled(v){return Array.isArray(v)?v.length>0:(v!==''&&v!==undefined&&v!==null&&v!==false)}
+function applyChanged(ch){
+  ch.forEach(function(k){
+    if(k==='pts'){if($('#map')&&!drag)drawMap();return}
+    var el=document.getElementById(k);if(!el||!el.dataset||el.dataset.k!==k||el===document.activeElement)return;
+    if(el.type==='checkbox')el.checked=!!S[k];else{el.value=S[k]||'';if(el.tagName==='TEXTAREA')autosize(el)}
+    if(k.indexOf('ax_')===0&&$('#map'))drawMap();
+    if(/^ai\d_bud$/.test(k)&&$('#sum'))sum();
+  });
+}
+function applyRO(){
+  if(CANW)return;
+  document.querySelectorAll('#main input,#main textarea').forEach(function(e){if(e.type==='checkbox')e.disabled=true;else e.readOnly=true});
+  document.querySelectorAll('#addPt,[data-del],#fillName,#fillCost').forEach(function(b){b.disabled=true});
+}
+function stepOfKey(){
+  var m={};['c_topic','c_num','c_team','cat0','cat1','cat2','cat3','cat4','cat_o','cat_other'].forEach(function(k){m[k]='封面'});
+  STEPS.forEach(function(s){keysOf(s).forEach(function(k){m[k]=s.n});});
+  ['ax_t','ax_b','ax_l','ax_r','pts','seg_lbl'].forEach(function(k){m[k]='STEP 3'});
+  return m;
+}
+function contributors(){
+  var sk=stepOfKey(),by={};
+  Object.keys(A).forEach(function(k){
+    var a=A[k];if(k==='roster'||!a||!isFilled(S[k]))return;
+    var r=by[a.by]||(by[a.by]={n:0,at:0,steps:{}});
+    r.n++;if(a.at>r.at)r.at=a.at;r.steps[sk[k]||'其他']=1;
+  });
+  return by;
+}
+function fillWho(){
+  var box=$('#whoBox');if(!box)return;
+  var by=contributors(),ids=Object.keys(by).sort(function(a,b){return by[b].n-by[a].n});
+  var note=DB?'':'<p class="who-note">目前資料只存在這個瀏覽器(隊友看不到你的紀錄)。原因:'+esc(WHY)+'</p>';
+  if(!ids.length){box.innerHTML='<p class="who-note">還沒有填寫紀錄。先在上方選好「填寫人」,再填表格,每一欄下方就會顯示是誰填的。</p>'+note;return}
+  var h='<p class="who-note">以每一欄最後一次編輯的人計算。</p><div class="scroll"><table class="w"><thead><tr><th>填寫者</th><th class="num">欄位數</th><th>負責的部分</th><th>最近編輯</th></tr></thead><tbody>';
+  ids.forEach(function(id){
+    var r=by[id];
+    h+='<tr><td>'+esc(nameOf(id))+'</td><td class="num">'+r.n+'</td><td>'+Object.keys(r.steps).map(function(s){return '<span class="chip">'+esc(s)+'</span>'}).join('')+'</td><td>'+esc(fmtAt(r.at))+'</td></tr>';
+  });
+  box.innerHTML=h+'</tbody></table></div>'+note;
+}
+function onSnap(snap){
+  var ids={},changed=[];
+  snap.docs.forEach(function(d){
+    var k=d.id,x=d.data();if(!x||dirty[k]||writing[k])return;
+    A[k]={by:x.by||'',at:x.at};
+    if(JSON.stringify(S[k])!==JSON.stringify(x.v)){S[k]=x.v;changed.push(k)}
+  });
+  snap.docChanges().forEach(function(c){
+    var k=c.doc.id;
+    if(c.type==='removed'&&!dirty[k]&&!writing[k]){delete S[k];delete A[k];changed.push(k)}
+  });
+  if(firstSnap){
+    firstSnap=false;
+    if(snap.empty&&CANW){ // move what was typed before sharing into the shared store
+      Object.keys(S).forEach(function(k,i){if(isFilled(S[k])){if(!A[k])A[k]={by:CUR,at:Date.now()};dirty[k]=1;clearTimeout(timers[k]);timers[k]=setTimeout(function(){flush(k)},400+i*80)}});
+    }
+  }
+  resolveNames(Object.keys(ids)).then(function(){
+    applyChanged(changed);fillSelect();refreshBy();renderRail();fillWho();
+    persist();
+  });
+}
+function noShare(msg){
+  WHY=msg;var m=$('#mode');m.textContent='僅存本機';m.className='mode';m.title=msg;fillWho();
+}
+function initShared(){
+  if(!(window.claude&&window.claude.use)){noShare('這個頁面不是在 Claude 裡開啟的(例如另存的檔案或單獨的網頁),無法使用共用資料。請從 Claude 的 artifact 連結開啟。');return}
+  Promise.all([window.claude.use('user'),window.claude.use('db')]).then(function(r){
+    var u=r[0],d=r[1];
+    if(!u||!d){noShare('目前的開啟方式沒有提供共用資料功能。請在 Claude 網站或 App 內開啟這個 artifact,並重新整理頁面。');return}
+    window.USERNS=u;
+    return u.me().then(function(me){
+      if(!me||!me.id){noShare('沒有登入 Claude,無法與隊友共用資料。');return}
+      ME=me;
+      return Promise.all([u.can('data.write'),u.canEdit()]).then(function(c){
+        CANW=c[0]!==false;CANADMIN=!!c[1];
+        DB=d;coll=d.collection('fields');
+        P[me.id]={id:me.id,name:me.name||'',isMe:true};
+        var m=$('#mode');m.textContent='多人共用';m.className='mode on';$('#saved').textContent='同步中…';
+        coll.onSnapshot(onSnap,function(){$('#saved').textContent='同步中斷';});
+        if(cur==='cover')renderPage('cover',true);else applyRO();
+      });
+    });
+  }).catch(function(){noShare('連線共用資料時發生錯誤,請重新整理頁面。')});
+}
+function toast(m){var t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(function(){t.hidden=true},2400)}
+
+/* ---------- schema ---------- */
+var CATS=['聰明消費者','理財小幫手','健康守護神','工作超天才','生活好朋友'];
+function F(k,l,o){o=o||{};o.k=k;o.l=l;return o}
+var STEPS=[
+ {id:'step1',n:'STEP 1',t:'企劃情報 / 概念分析表',use:'將企劃目的,透過內外情報分析,轉化企劃案的核心概念與企劃構想。',
+  secs:[
+   {cls:'g2',f:[F('title','標題 / 副標題',{rows:2,ph:'例:校園二手書循環平台|讓每本書多被讀三次'}),F('compete','競爭情報分析',{rows:2,ph:'現有替代方案、直接與間接競爭者'})]},
+   {title:'企劃目的',cls:'g1',f:[F('purpose','為什麼要做這個企劃?想解決什麼問題?',{rows:3})]},
+   {title:'外部大環境 / 時代趨勢情報分析',cls:'g2',f:[F('pol','政治 / 法律趨勢情報',{rows:3}),F('eco','經濟 / 消費趨勢情報',{rows:3}),F('soc','社會 / 人口趨勢情報',{rows:3}),F('tec','科技 / 技術趨勢情報',{rows:3})]},
+   {cls:'g2',f:[F('cons','消費者情報分析',{rows:4,ph:'目標族群的行為、需求、痛點'}),F('ind','產業情報分析',{rows:4,ph:'市場規模、成長性、價值鏈'})]},
+   {title:'內部情報 / 資源盤點',cls:'g1',f:[F('inner','團隊擁有的人力、技術、資金、通路與人脈',{rows:3})]}
+  ]},
+ {id:'step2',n:'STEP 2',t:'現況分析與策略目標設定表',use:'將企劃構想與概念轉化為企劃案願景描述,透過 SWOT 現況分析導引策略議題與企劃方針,進行目標設定、障礙分析與策略形成。',
+  swot:true,
+  secs:[
+   {cls:'g3',f:[F('goal_s','策略目標',{rows:4}),F('goal_r','成果目標',{rows:4,ph:'可衡量的結果,例:三個月內 500 位註冊用戶'}),F('goal_b','關鍵障礙',{rows:4})]},
+   {title:'對策辦法',cls:'g1',f:[F('plan','綜合思考能滿足的策略議題,並能解決關鍵問題的對策辦法',{rows:6,sub:'如:市場行銷對策、產品研發對策、生產製造對策、財務對策、人事對策等'})]}
+  ]},
+ {id:'step3',n:'STEP 3',t:'STP 市場策略設計表',use:'依市場區隔(Segmentation)、目標市場(Targeting)、市場定位(Positioning)三步驟,決定要服務誰、用什麼角色被記住。',
+  stp:true},
+ {id:'step4',n:'STEP 4',t:'行銷戰術及溝通活動設計表',use:'用 7Ps 設計行銷戰術,再依顧客心理程序(AIDAS)安排溝通活動、成果目標與預算。',
+  p7:true},
+ {id:'step5',n:'STEP 5',t:'一頁企劃書',use:'把前四步的結論收斂成一頁,方便評審快速理解。',
+  one:true}
+];
+var P7=[['prod','產品','Product'],['price','價格','Price'],['promo','宣傳促銷','Promotion'],['place','通路','Place'],['ppl','人員訓練','People'],['phys','有型展示','Physical Evidence'],['proc','服務流程','Process']];
+var AIDAS=[['引起注意 / 建立認知','Attention / Awareness'],['增加興趣','Interest'],['刺激慾望','Desire'],['促使行動','Action'],['提高滿意','Satisfaction']];
+var SEGV=[['jtbd','顧客任務','Jobs-to-be-done'],['demo','人口統計變數','']];
+var SW=[ // key,label,hint
+ ['s','S 優勢','Strengths'],['w','W 劣勢','Weaknesses'],
+ ['o','O 機會','Opportunities'],['so','S×O','用優勢抓住機會'],['wo','W×O','補強劣勢以把握機會'],
+ ['t','T 威脅','Threats'],['st','S×T','用優勢降低威脅'],['wt','W×T','避開威脅、減少劣勢']];
+
+function keysOf(st){
+  var ks=[];
+  (st.secs||[]).forEach(function(s){s.f.forEach(function(f){ks.push(f.k)})});
+  if(st.swot)SW.forEach(function(x){ks.push('sw_'+x[0])});
+  if(st.stp){ks.push('prodname','target','feat','posstmt');['a','b','c'].forEach(function(c){SEGV.forEach(function(r){ks.push('seg_'+c+'_'+r[0])});ks.push('seg_'+c+'_x')})}
+  if(st.p7){P7.forEach(function(p){ks.push('p7_'+p[0])});AIDAS.forEach(function(a,i){ks.push('ai'+i+'_act','ai'+i+'_goal','ai'+i+'_bud','ai'+i+'_note')})}
+  if(st.one)ks.push('o_name','o_goal','o_eff','o_what','o_who','o_cost','o_how');
+  return ks;
+}
+function progress(st){
+  var ks=keysOf(st),n=0;
+  ks.forEach(function(k){if(S[k]&&String(S[k]).trim())n++});
+  return {n:n,total:ks.length};
+}
+function coverProgress(){
+  var ks=['c_topic','c_num','c_team'],n=0,tot=4;
+  ks.forEach(function(k){if(S[k]&&String(S[k]).trim())n++});
+  if(CATS.some(function(_,i){return S['cat'+i]})||S.cat_other)n++;
+  return {n:n,total:tot};
+}
+
+/* ---------- field renderers ---------- */
+function fld(f){
+  var lab='<span class="lb">'+esc(f.l)+(f.sub?'<small>'+esc(f.sub)+'</small>':'')+'</span>';
+  var ctl=f.line?'<input type="text" id="'+f.k+'" data-k="'+f.k+'" placeholder="'+esc(f.ph||'')+'">'
+    :'<textarea id="'+f.k+'" data-k="'+f.k+'" rows="'+(f.rows||3)+'" placeholder="'+esc(f.ph||'')+'"></textarea>';
+  return '<label class="fld">'+lab+ctl+'<span class="by" data-by="'+f.k+'"></span></label>';
+}
+function ta(k,rows,ph){return '<textarea id="'+k+'" data-k="'+k+'" rows="'+(rows||2)+'" placeholder="'+esc(ph||'')+'" aria-label="'+esc(k)+'"></textarea><span class="by" data-by="'+k+'"></span>'}
+
+function renderSecs(secs){
+  return secs.map(function(s){
+    return '<section class="blk">'+(s.title?'<h3>'+esc(s.title)+'</h3>':'')+'<div class="grid '+(s.cls==='g1'?'':s.cls)+'">'+s.f.map(fld).join('')+'</div></section>';
+  }).join('');
+}
+function renderSwot(){
+  var h='<section class="blk"><h3>SWOT 現況分析</h3><div class="swot">';
+  h+='<div class="corner"><span>內部因素 → S / W</span><span>外部因素 ↓ O / T</span></div>';
+  var order=['s','w','o','so','wo','t','st','wt'];
+  var map={};SW.forEach(function(x){map[x[0]]=x});
+  function cell(k){
+    var x=map[k],cross=k.length>1;
+    return '<div class="cell '+(cross?'x':'')+'"><div class="hd"><span>'+esc(x[1])+'</span><small>'+esc(x[2])+'</small></div>'+ta('sw_'+k,4)+'</div>';
+  }
+  h+=cell('s')+cell('w');
+  h+=cell('o')+cell('so')+cell('wo');
+  h+=cell('t')+cell('st')+cell('wt');
+  return h+'</div></section>';
+}
+function renderStp(){
+  var h='<section class="blk"><div class="fld"><label class="lb" for="prodname">商品 / 服務名稱</label><input type="text" id="prodname" data-k="prodname" placeholder="例:書循環"></div></section>';
+  h+='<section class="blk"><h3>市場區隔(Segmentation)</h3><div class="scroll"><table class="t"><thead><tr><th class="rh">區隔變數</th>';
+  ['a','b','c'].forEach(function(c){h+='<th>市場區隔 '+c.toUpperCase()+'</th>'});
+  h+='</tr></thead><tbody>';
+  SEGV.forEach(function(r){
+    h+='<tr><th>'+esc(r[1])+(r[2]?'<small>'+esc(r[2])+'</small>':'')+'</th>';
+    ['a','b','c'].forEach(function(c){h+='<td>'+ta('seg_'+c+'_'+r[0],3)+'</td>'});
+    h+='</tr>';
+  });
+  h+='<tr><th><input type="text" id="seg_lbl" data-k="seg_lbl" placeholder="自訂變數" aria-label="自訂區隔變數名稱"></th>';
+  ['a','b','c'].forEach(function(c){h+='<td>'+ta('seg_'+c+'_x',3)+'</td>'});
+  h+='</tr></tbody></table></div></section>';
+  h+='<section class="blk"><div class="grid g2">'+
+    fld(F('target','目標市場(Targeting)',{rows:5,sub:'從上面選出要主攻的區隔,並說明理由'}))+
+    fld(F('feat','產品或服務的功能 / 特色',{rows:5}))+'</div></section>';
+  h+='<section class="blk"><h3>市場定位(Positioning)</h3>'+
+    '<div class="axes">'+
+    '<label class="fld"><span class="lb">上方軸</span><input type="text" id="ax_t" data-k="ax_t" placeholder="例:價格高"></label>'+
+    '<label class="fld"><span class="lb">下方軸</span><input type="text" id="ax_b" data-k="ax_b" placeholder="例:價格低"></label>'+
+    '<label class="fld"><span class="lb">左方軸</span><input type="text" id="ax_l" data-k="ax_l" placeholder="例:傳統"></label>'+
+    '<label class="fld"><span class="lb">右方軸</span><input type="text" id="ax_r" data-k="ax_r" placeholder="例:創新"></label></div>'+
+    '<div class="map" id="map" role="img" aria-label="定位圖"></div>'+
+    '<div class="lb">圖上的品牌<small>拖曳圓點調整位置,第一個是自己的企劃。</small></div>'+
+    '<div class="pts" id="pts"></div><div class="hint"><button class="btn sm" id="addPt" type="button">新增競爭品牌</button></div></section>';
+  h+='<section class="blk"><div class="grid">'+fld(F('posstmt','定位聲明',{rows:3,sub:'對〔目標客群〕而言,〔品牌〕是〔類別〕中最能〔核心利益〕的選擇,因為〔支持理由〕'}))+'</div></section>';
+  return h;
+}
+function renderP7(){
+  var h='<section class="blk"><h3>行銷戰術設計(7Ps)</h3><div class="grid g3">';
+  P7.forEach(function(p){h+=fld(F('p7_'+p[0],p[1]+'('+p[2]+')',{rows:4}))});
+  h+='</div></section>';
+  h+='<section class="blk"><h3>行銷活動設計</h3><div class="scroll"><table class="t"><thead><tr><th class="rh">顧客心理程序<small>AIDAS</small></th><th>行動溝通活動</th><th>成果目標<small>達成 / 創造 / 改變</small></th><th style="width:140px">行銷溝通預算<small>元</small></th><th>備註</th></tr></thead><tbody>';
+  AIDAS.forEach(function(a,i){
+    h+='<tr><th>'+esc(a[0])+'<small>'+esc(a[1])+'</small></th><td>'+ta('ai'+i+'_act',3)+'</td><td>'+ta('ai'+i+'_goal',3)+'</td>'+
+    '<td><input type="text" inputmode="numeric" id="ai'+i+'_bud" data-k="ai'+i+'_bud" class="bud" placeholder="0" aria-label="預算"></td><td>'+ta('ai'+i+'_note',3)+'</td></tr>';
+  });
+  h+='</tbody></table></div><div class="total"><span>預算合計</span><b id="sum">0</b><span>元</span></div></section>';
+  return h;
+}
+function renderOne(){
+  return '<section class="blk"><div class="fld"><label class="lb" for="o_name">企劃案名稱</label><input type="text" id="o_name" data-k="o_name"></div><div class="hint"><button class="btn sm" id="fillName" type="button">帶入封面題目</button></div></section>'+
+  '<section class="blk"><h3>1、目的與效益(Why / Evaluate)</h3><div class="grid g2">'+fld(F('o_goal','目的 / 目標',{rows:5}))+fld(F('o_eff','效益',{rows:5}))+'</div></section>'+
+  '<section class="blk"><div class="grid g2"><div><h3 style="margin:0 0 8px;font-size:14px;background:var(--head);padding:5px 10px;border-radius:4px">2、內容要點(What)</h3>'+ta('o_what',12)+'</div>'+
+  '<div style="display:flex;flex-direction:column;gap:12px;min-width:0"><div><h3 style="margin:0 0 8px;font-size:14px;background:var(--head);padding:5px 10px;border-radius:4px">4、執行團隊(Who)</h3>'+ta('o_who',5)+'</div>'+
+  '<div><h3 style="margin:0 0 8px;font-size:14px;background:var(--head);padding:5px 10px;border-radius:4px">5、所需經費(How much)</h3>'+ta('o_cost',4)+'<div class="hint"><button class="btn sm" id="fillCost" type="button">帶入 STEP 4 預算合計</button></div></div></div></div></section>'+
+  '<section class="blk"><h3>3、實施方式(How / Where / When)</h3><div class="grid">'+ta('o_how',6,'時程、地點、執行步驟')+'</div></section>';
+}
+function renderCover(){
+  var h='<div class="kicker">第 15 屆 TBSA 全國大專創新企劃競賽</div><h1>封面與目錄</h1><p class="use">先填寫參賽資料,再依序完成五張表單。每一欄下方會顯示最後編輯的人與時間。</p>';
+  h+='<section class="blk"><div class="grid g3">'+
+    fld(F('c_topic','題目',{line:1}))+fld(F('c_num','參賽編號',{line:1}))+fld(F('c_team','團隊名稱',{line:1}))+'</div></section>';
+  h+='<section class="blk"><h3>參賽類別(請勾選)</h3><div class="cats">';
+  CATS.forEach(function(c,i){h+='<label class="cat"><input type="checkbox" id="cat'+i+'" data-k="cat'+i+'" data-b="1"><span>【'+c+'】</span></label>'});
+  h+='<label class="cat"><input type="checkbox" id="cat_o" data-k="cat_o" data-b="1"><span>其他</span><input type="text" id="cat_other" data-k="cat_other" aria-label="其他類別" placeholder="請填寫"></label></div></section>';
+  h+='<section class="blk"><h3>目錄</h3><div class="toc">';
+  STEPS.forEach(function(s){
+    var p=progress(s);
+    h+='<button type="button" data-go="'+s.id+'"><span class="n">'+s.n+'</span><span class="t">'+esc(s.t)+'</span><span class="pg"><i style="width:'+Math.round(p.n/p.total*100)+'%"></i></span><span class="c">已填 '+p.n+' / '+p.total+' 欄</span></button>';
+  });
+  h+='</div></section><section class="blk"><h3>填寫紀錄</h3><div id="whoBox"></div></section>';
+  return h;
+}
+
+/* ---------- pages ---------- */
+var cur='cover';
+function order(){return ['cover'].concat(STEPS.map(function(s){return s.id}))}
+function renderRail(){
+  var h='';
+  [{id:'cover',n:'封面',t:'封面與目錄',p:coverProgress()}].concat(STEPS.map(function(s){return {id:s.id,n:s.n.replace('STEP ','S'),t:s.t,p:progress(s)}})).forEach(function(x){
+    h+='<button type="button" class="tab" data-go="'+x.id+'"'+(x.id===cur?' aria-current="page"':'')+'><span class="n">'+x.n+'</span><span class="t">'+esc(x.t)+'</span><span class="pg"><i style="width:'+Math.round(x.p.n/x.p.total*100)+'%"></i></span></button>';
+  });
+  $('#rail').innerHTML=h;
+}
+function renderPage(id,noScroll){
+  cur=id;var st=STEPS.filter(function(s){return s.id===id})[0],h;
+  if(id==='cover'||!st)h=renderCover();
+  else{
+    h='<div class="kicker">'+st.n+'</div><h1>'+esc(st.t)+'</h1><p class="use">'+esc(st.use)+'</p>';
+    if(st.swot)h+=renderSwot();
+    if(st.secs)h+=renderSecs(st.secs);
+    if(st.stp)h+=renderStp();
+    if(st.p7)h+=renderP7();
+    if(st.one)h+=renderOne();
+  }
+  var o=order(),i=o.indexOf(id);
+  h+='<div class="pager"><button class="btn" type="button" '+(i>0?'data-go="'+o[i-1]+'"':'disabled')+'>← 上一步</button><button class="btn pri" type="button" '+(i<o.length-1?'data-go="'+o[i+1]+'"':'disabled')+'>下一步 →</button></div>';
+  if(!CANW)h='<p class="banner">你目前只能檢視,不能編輯。請請擁有者把你設為「可編輯」。</p>'+h;
+  $('#main').innerHTML=h;
+  bind();
+  fillWho();
+  renderRail();
+  if(!noScroll)window.scrollTo(0,0);
+  try{history.replaceState(null,'','#'+id)}catch(e){}
+}
+function autosize(el){el.style.height='auto';el.style.height=(el.scrollHeight+2)+'px'}
+function bind(){
+  var m=$('#main');
+  m.querySelectorAll('[data-k]').forEach(function(el){
+    var k=el.dataset.k;
+    if(el.type==='checkbox')el.checked=!!S[k];else el.value=S[k]||'';
+  });
+  m.querySelectorAll('textarea').forEach(autosize);
+  if($('#map'))drawMap();
+  if($('#sum'))sum();
+  refreshBy();applyRO();
+}
+function sum(){
+  var t=0;AIDAS.forEach(function(_,i){var v=parseFloat(String(S['ai'+i+'_bud']||'').replace(/[^0-9.\-]/g,''));if(!isNaN(v))t+=v});
+  $('#sum').textContent=t.toLocaleString('zh-TW');return t;
+}
+
+/* ---------- positioning map ---------- */
+function pts(){if(!Array.isArray(S.pts)||!S.pts.length)S.pts=[{n:'本案',x:.7,y:.3}];return S.pts}
+function drawMap(){
+  var map=$('#map'),p=pts();
+  var h='<span class="ax t">'+esc(S.ax_t||'')+'</span><span class="ax b">'+esc(S.ax_b||'')+'</span><span class="ax l">'+esc(S.ax_l||'')+'</span><span class="ax r">'+esc(S.ax_r||'')+'</span>';
+  p.forEach(function(d,i){h+='<div class="dot'+(i===0?' me':'')+'" data-i="'+i+'" style="left:'+d.x*100+'%;top:'+d.y*100+'%"><i></i><span>'+esc(d.n||'未命名')+'</span></div>'});
+  map.innerHTML=h;
+  var l='';
+  p.forEach(function(d,i){l+='<div class="pt"><input type="text" data-pi="'+i+'" value="'+esc(d.n)+'" aria-label="品牌名稱 '+(i+1)+'" placeholder="品牌名稱">'+(i>0?'<button class="btn sm" type="button" data-del="'+i+'">刪除</button>':'')+'</div>'});
+  $('#pts').innerHTML=l;
+}
+var drag=null;
+document.addEventListener('pointerdown',function(e){
+  var d=e.target.closest&&e.target.closest('.dot');if(!d)return;
+  drag={i:+d.dataset.i,el:d};d.setPointerCapture&&d.setPointerCapture(e.pointerId);e.preventDefault();
+});
+document.addEventListener('pointermove',function(e){
+  if(!drag)return;var r=$('#map').getBoundingClientRect();
+  var x=Math.min(1,Math.max(0,(e.clientX-r.left)/r.width)),y=Math.min(1,Math.max(0,(e.clientY-r.top)/r.height));
+  var d=pts()[drag.i];d.x=+x.toFixed(3);d.y=+y.toFixed(3);
+  drag.el.style.left=x*100+'%';drag.el.style.top=y*100+'%';
+});
+document.addEventListener('pointerup',function(){if(drag){drag=null;setField('pts',pts())}});
+
+/* ---------- events ---------- */
+document.addEventListener('input',function(e){
+  var el=e.target;
+  if(el.dataset&&el.dataset.pi!==undefined){pts()[+el.dataset.pi].n=el.value;var s=$('#map .dot[data-i="'+el.dataset.pi+'"] span');if(s)s.textContent=el.value||'未命名';setField('pts',pts());return}
+  var k=el.dataset&&el.dataset.k;if(!k)return;
+  setField(k,el.type==='checkbox'?el.checked:el.value);
+  if(el.tagName==='TEXTAREA')autosize(el);
+  if(k.indexOf('ax_')===0)drawMap();
+  if(/^ai\d_bud$/.test(k))sum();
+});
+document.addEventListener('change',function(e){
+  if(e.target.id==='whoSel'){CUR=e.target.value;try{localStorage.setItem('tbsa15-me',CUR)}catch(x){};$('#whoWrap').classList.toggle('need',!CUR)}
+});
+document.addEventListener('click',function(e){
+  var t=e.target.closest('button');if(!t)return;
+  if(t.dataset.go){renderPage(t.dataset.go);return}
+  if(t.dataset.del){pts().splice(+t.dataset.del,1);drawMap();setField('pts',pts());return}
+  switch(t.id){
+    case 'addPt':var p=pts();p.push({n:'競爭品牌 '+p.length,x:.3,y:.6});drawMap();setField('pts',p);break;
+    case 'fillName':if(!S.c_topic){toast('封面還沒有填題目')}else{$('#o_name').value=S.c_topic;setField('o_name',S.c_topic)}break;
+    case 'fillCost':var tot=sum();var nc=(S.o_cost?S.o_cost+'\n':'')+'行銷溝通預算合計 '+tot.toLocaleString('zh-TW')+' 元';$('#o_cost').value=nc;autosize($('#o_cost'));setField('o_cost',nc);break;
+    case 'bCopy':copyText(toMarkdown(),'已複製,可貼到 Word 或 Google 文件');break;
+    case 'bRoster':$('#rosterBox').value=roster().join('\n');$('#rosterPanel').hidden=!$('#rosterPanel').hidden;break;
+    case 'bRosterClose':$('#rosterPanel').hidden=true;break;
+    case 'bRosterSave':
+      var seen={},names=[];$('#rosterBox').value.split(/\r?\n/).forEach(function(x){x=x.trim();if(x&&!seen[x]){seen[x]=1;names.push(x)}});
+      setField('roster',names);fillSelect();fillWho();$('#rosterPanel').hidden=true;toast('已儲存組員名單');break;
+    case 'bData':$('#panel').hidden=!$('#panel').hidden;break;
+    case 'bClosePanel':$('#panel').hidden=true;break;
+    case 'bBackup':$('#dataBox').value=JSON.stringify(S);copyText(JSON.stringify(S),'已複製備份代碼');break;
+    case 'bRestore':restore();break;
+    case 'bReset':
+      if(DB&&!CANADMIN){toast('共用內容只有編輯者可以清空');break}
+      if(t.dataset.arm){
+        var old=Object.keys(A);if(S.roster)old.push('roster');var keep=roster();S={};A={};try{localStorage.removeItem(KEY);localStorage.removeItem(KEY+'-by')}catch(x){};S.roster=keep;if(DB&&keep.length){old=old.filter(function(k){return k!=='roster'})}
+        if(DB){old.reduce(function(pr,k){return pr.then(function(){return coll.doc(k).delete()})},Promise.resolve()).catch(function(){toast('部分內容清除失敗,請再按一次')})}
+        renderPage(cur,true);toast('已清空全部內容');t.textContent='清空';delete t.dataset.arm}
+      else{t.dataset.arm='1';t.textContent='再按一次確認清空';setTimeout(function(){t.textContent='清空';delete t.dataset.arm},4000)}
+      break;
+  }
+});
+function copyText(txt,okMsg){
+  var box=$('#dataBox');
+  function fallback(){$('#panel').hidden=false;box.value=txt;box.focus();box.select();toast('請按 Ctrl/⌘+C 複製選取的文字')}
+  try{navigator.clipboard.writeText(txt).then(function(){toast(okMsg)},fallback)}catch(e){fallback()}
+}
+function restore(){
+  try{var o=JSON.parse($('#dataBox').value);if(!o||typeof o!=='object')throw 0;
+    if(DB){Object.keys(o).forEach(function(k,i){if(isFilled(o[k]))setField(k,o[k],400+i*80)});}else S=o;
+    save();renderPage(cur,true);toast('已還原')}
+  catch(e){toast('代碼格式不正確,請重新貼上完整的備份代碼')}
+}
+
+/* ---------- export ---------- */
+function toMarkdown(){
+  var o=[],v=function(k){var t=(S[k]||'').toString().trim();if(!t)return '(未填)';return A[k]&&A[k].by?t+'\n\n_填寫:'+byText(k)+'_':t};
+  o.push('# 第 15 屆 TBSA 全國大專創新企劃競賽','','- 題目:'+v('c_topic'),'- 參賽編號:'+v('c_num'),'- 團隊名稱:'+v('c_team'));
+  var cs=CATS.filter(function(_,i){return S['cat'+i]});if(S.cat_o)cs.push('其他'+(S.cat_other?':'+S.cat_other:''));
+  o.push('- 參賽類別:'+(cs.join('、')||'(未選)'),'');
+  function fields(list){list.forEach(function(f){o.push('**'+f.l+'**','',v(f.k),'')})}
+  STEPS.forEach(function(st){
+    o.push('## '+st.n+' '+st.t,'');
+    if(st.swot){o.push('### SWOT','');SW.forEach(function(x){o.push('**'+x[1]+'**','',v('sw_'+x[0]),'')})}
+    if(st.secs)st.secs.forEach(function(s){if(s.title)o.push('### '+s.title,'');fields(s.f)});
+    if(st.stp){
+      o.push('**商品 / 服務名稱**:'+v('prodname'),'','### 市場區隔','');
+      ['a','b','c'].forEach(function(c){
+        o.push('**市場區隔 '+c.toUpperCase()+'**');
+        SEGV.forEach(function(r){o.push('- '+r[1]+':'+v('seg_'+c+'_'+r[0]))});
+        if(S.seg_lbl||S['seg_'+c+'_x'])o.push('- '+(S.seg_lbl||'自訂變數')+':'+v('seg_'+c+'_x'));
+        o.push('');
+      });
+      o.push('**目標市場(Targeting)**','',v('target'),'','**產品或服務的功能 / 特色**','',v('feat'),'','### 市場定位(Positioning)','');
+      o.push('座標軸:上「'+(S.ax_t||'')+'」/ 下「'+(S.ax_b||'')+'」/ 左「'+(S.ax_l||'')+'」/ 右「'+(S.ax_r||'')+'」');
+      pts().forEach(function(d){o.push('- '+d.n+':橫 '+Math.round(d.x*100)+'%、縱 '+Math.round((1-d.y)*100)+'%')});
+      o.push('','**定位聲明**','',v('posstmt'),'');
+    }
+    if(st.p7){
+      o.push('### 行銷戰術設計(7Ps)','');P7.forEach(function(p){o.push('**'+p[1]+'(' +p[2]+')**','',v('p7_'+p[0]),'')});
+      o.push('### 行銷活動設計','','| 顧客心理程序 | 行動溝通活動 | 成果目標 | 預算 | 備註 |','|---|---|---|---|---|');
+      var cl=function(k){return (S[k]||'').toString().replace(/\n/g,'<br>').replace(/\|/g,'/')};
+      AIDAS.forEach(function(a,i){o.push('| '+a[0]+' | '+cl('ai'+i+'_act')+' | '+cl('ai'+i+'_goal')+' | '+cl('ai'+i+'_bud')+' | '+cl('ai'+i+'_note')+' |')});
+      o.push('','預算合計:'+sum().toLocaleString('zh-TW')+' 元','');
+    }
+    if(st.one){
+      o.push('**企劃案名稱**:'+v('o_name'),'');
+      [['o_goal','1、目的 / 目標'],['o_eff','1、效益'],['o_what','2、內容要點(What)'],['o_how','3、實施方式(How / Where / When)'],['o_who','4、執行團隊(Who)'],['o_cost','5、所需經費(How much)']].forEach(function(x){o.push('**'+x[1]+'**','',v(x[0]),'')});
+    }
+  });
+  var by=contributors(),ids=Object.keys(by);
+  if(ids.length){o.push('## 填寫紀錄','');ids.sort(function(a,b){return by[b].n-by[a].n}).forEach(function(id){o.push('- '+nameOf(id)+':'+by[id].n+' 欄(' +Object.keys(by[id].steps).join('、')+'),最近編輯 '+fmtAt(by[id].at))});o.push('')}
+  return o.join('\n');
+}
+
+/* ---------- boot ---------- */
+load();
+var h=(location.hash||'').replace('#','');
+renderPage(order().indexOf(h)>-1?h:'cover',true);
+fillSelect();
+initShared();
+window.addEventListener('hashchange',function(){var x=(location.hash||'').replace('#','');if(order().indexOf(x)>-1&&x!==cur)renderPage(x)});
+})();
+</script>
+
+</body>
+</html>
