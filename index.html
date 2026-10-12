@@ -13,14 +13,16 @@
 :root{
   --bg:#eef1f6; --surface:#ffffff; --ink:#172033; --mute:#5b6678; --line:#d3dae6;
   --head:#e6ebf3; --accent:#1d4e89; --on-accent:#ffffff; --accent-soft:#e1ebf7; --ok:#2e7d57; --warn:#b4571b;
+  --c1:#2f6fde; --c2:#0e8f80; --c3:#c97a00; --c4:#c93f66; --c5:#6d51c9; --pill-ink:#ffffff;
+  --ex:#fff8db; --exline:#e9c94a; --pit-bg:#fdf0f2; --pit-ink:#7d2440; --tip-bg:#eef6f4; --tip-ink:#21514b;
   --serif:"Noto Serif TC","Songti TC","PMingLiU",serif; --sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#0e1420; --surface:#162033; --ink:#e5eaf3; --mute:#99a5b8; --line:#2a3752;
-  --head:#1d2a41; --accent:#86b6ef; --on-accent:#0e1a2e; --accent-soft:#1c2d4a; --ok:#6cc79a; --warn:#f0a06a; color-scheme:dark}}
+  --head:#1d2a41; --accent:#86b6ef; --on-accent:#0e1a2e; --accent-soft:#1c2d4a; --ok:#6cc79a; --warn:#f0a06a; --c1:#7fa8f0; --c2:#4cc0b0; --c3:#e0a24a; --c4:#ee7c9c; --c5:#a590ee; --pill-ink:#0e1a2e; --ex:#2b2917; --exline:#6b5e1d; --pit-bg:#3a1f28; --pit-ink:#f3b4c6; --tip-bg:#17302d; --tip-ink:#a9dcd3; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#0e1420; --surface:#162033; --ink:#e5eaf3; --mute:#99a5b8; --line:#2a3752;
-  --head:#1d2a41; --accent:#86b6ef; --on-accent:#0e1a2e; --accent-soft:#1c2d4a; --ok:#6cc79a; --warn:#f0a06a; color-scheme:dark}
+  --head:#1d2a41; --accent:#86b6ef; --on-accent:#0e1a2e; --accent-soft:#1c2d4a; --ok:#6cc79a; --warn:#f0a06a; --c1:#7fa8f0; --c2:#4cc0b0; --c3:#e0a24a; --c4:#ee7c9c; --c5:#a590ee; --pill-ink:#0e1a2e; --ex:#2b2917; --exline:#6b5e1d; --pit-bg:#3a1f28; --pit-ink:#f3b4c6; --tip-bg:#17302d; --tip-ink:#a9dcd3; color-scheme:dark}
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.6;padding-inline:16px;padding-block:0 48px}
 button,input,textarea{font:inherit;color:inherit}
@@ -110,7 +112,7 @@ table.t textarea:focus,table.t input[type=text]:focus{border-color:var(--accent)
 .panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;margin-top:12px}
 .panel textarea{height:140px;overflow:auto;resize:vertical;font-family:ui-monospace,Menlo,monospace;font-size:12px}
 .panel .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:8px 16px;border-radius:6px;font-size:14px;z-index:9;max-width:90vw}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:8px 16px;border-radius:6px;font-size:14px;z-index:30;max-width:90vw}
 .by{display:block;font-size:11px;color:var(--mute);line-height:1.4;min-height:0}
 .by:empty{display:none}
 table.t .by{padding:0 6px 2px}
@@ -133,6 +135,50 @@ table.w th{font-size:12px;color:var(--mute);font-weight:500}
 table.w td.num,table.w th.num{text-align:right;font-variant-numeric:tabular-nums}
 .chip{display:inline-block;font-size:12px;background:var(--accent-soft);border-radius:4px;padding:0 6px;margin:0 4px 2px 0;white-space:nowrap}
 .who-note{font-size:13px;color:var(--mute);margin:0 0 8px}
+.pill{display:inline-block;font-size:12px;font-weight:700;padding:2px 10px;border-radius:99px;color:var(--pill-ink);letter-spacing:.04em}
+.hbtn{display:inline-grid;place-items:center;width:18px;height:18px;margin-left:6px;border-radius:50%;border:1px solid var(--accent);background:transparent;color:var(--accent);font-size:12px;font-weight:700;line-height:1;cursor:pointer;padding:0;vertical-align:middle}
+.hbtn:hover,.hbtn[aria-expanded="true"]{background:var(--accent);color:var(--on-accent)}
+.swot .hr{display:flex;align-items:center;gap:4px}
+.intro{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:12px 14px;font-size:14px}
+.intro p{margin:6px 0 0}
+.rels{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:8px}
+.rl{font-size:12px;color:var(--mute);font-weight:700;min-width:5.5em}
+.rchip{border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:2px 9px;font-size:12.5px;cursor:pointer}
+.rchip:hover{border-color:var(--accent)}
+.chk{display:flex;flex-direction:column;gap:2px}
+.cki{display:flex;gap:8px;align-items:flex-start;padding:4px 0;cursor:pointer;font-size:14px}
+.cki input{margin-top:5px;accent-color:var(--accent)}
+.ckn{margin-left:8px;font-weight:400;color:var(--mute);font-variant-numeric:tabular-nums}
+.cprog{height:6px;background:var(--line);border-radius:6px;overflow:hidden;margin-top:8px}
+.cprog i{display:block;height:100%;width:0;transition:width .3s}
+.tipbox{margin-top:12px;background:var(--tip-bg);color:var(--tip-ink);border-radius:8px;padding:10px 12px;font-size:14px}
+.howto{display:flex;flex-direction:column;gap:6px;font-size:14px;margin:0;padding-left:18px}
+.verbs{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:13px;color:var(--mute);margin-bottom:8px}
+.drawer{position:fixed;z-index:15;background:var(--surface);color:var(--ink);overflow:auto;padding:16px;box-shadow:0 0 24px rgba(0,0,0,.12)}
+.drawer[hidden]{display:none}
+@media (min-width:1101px){.drawer{top:0;right:0;bottom:0;width:380px;border-left:1px solid var(--line)}body.has-drawer{padding-right:396px}}
+@media (max-width:1100px){.drawer{left:0;right:0;bottom:0;max-height:58vh;border-top:1px solid var(--line);border-radius:12px 12px 0 0;padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))}body.has-drawer{padding-bottom:60vh}}
+.dtop{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:6px}
+.drawer h3{margin:0;font-size:17px;font-family:var(--serif);line-height:1.4}
+.drawer h4{margin:14px 0 4px;font-size:12px;letter-spacing:.06em;color:var(--mute)}
+.drawer p{margin:0;font-size:14px}
+.drawer ul{margin:0;padding-left:18px;font-size:14px}
+.dmute{color:var(--mute)}
+.pit{background:var(--pit-bg);color:var(--pit-ink);border-radius:6px;padding:8px 10px;font-size:13.5px}
+.exd{margin-top:14px;border:1px solid var(--exline);border-radius:8px;background:var(--ex)}
+.exd summary{cursor:pointer;padding:8px 12px;font-weight:700;font-size:14px}
+.exb{padding:0 12px 10px;font-size:13.5px}
+.exb ul,.exb ol{margin:0;padding-left:18px}
+.exb p{margin:0 0 4px}
+.exb .exn{font-size:12px;color:var(--mute);margin-top:8px}
+.exl{list-style:none;padding:0!important}.exl li{margin-bottom:6px}.exl b{display:block;font-size:12px;color:var(--mute)}
+.from{display:inline-block;font-size:11px;font-weight:700;border-radius:5px;padding:0 6px;margin-right:4px;color:#fff}
+.drawer ul.rel{list-style:none;padding:0}
+.rel li{padding:6px 8px;border:1px solid var(--line);border-radius:6px;margin-bottom:6px;cursor:pointer;font-size:13.5px}
+.rel li:hover{border-color:var(--accent)}
+.rel li small{display:block;color:var(--mute)}
+.flash{animation:flash 1.4s ease 2}
+@keyframes flash{0%,100%{box-shadow:0 0 0 0 transparent}50%{box-shadow:0 0 0 4px var(--accent)}}
 .foot{margin-top:24px;font-size:12px;color:var(--mute);max-width:80ch}
 @media (max-width:860px){
   .layout{grid-template-columns:minmax(0,1fr)}
@@ -179,6 +225,7 @@ table.w td.num,table.w th.num{text-align:right;font-variant-numeric:tabular-nums
   <p class="foot">本企劃表單為 WBSA 商務策劃師聯合會台灣辦事處所授權,僅提供「TBSA 商務企劃能力檢定」企劃學習之使用,非經授權勿用於他處。</p>
 </div>
 <div class="toast" id="toast" hidden></div>
+<aside class="drawer" id="drawer" hidden aria-label="填寫說明"><div class="dtop"><span class="dmute" style="font-size:12px">填寫說明</span><button class="btn sm" id="dClose" type="button">關閉</button></div><div id="dBody"></div></aside>
 <div class="gate" id="gate" hidden>
   <form class="gcard" id="gform" autocomplete="off">
     <h2 id="gtitle">登入</h2>
@@ -190,6 +237,314 @@ table.w td.num,table.w th.num{text-align:right;font-variant-numeric:tabular-nums
 </div>
 
 <script>
+var TEACH=(function(){
+/* ================= DATA ================= */
+const STEPS = [
+  {n:1, key:'f1', name:'企劃情報／概念分析表', short:'企劃情報', color:'#2F6FDE', verb:'看清楚', q:'為什麼要做？外部發生什麼、我們手上有什麼？',
+   usage:'將企劃目的，透過內外情報分析，確立企劃案的核心概念與企劃構想。',
+   role:'整份企劃的「原料庫」。後面每一張表的判斷，都必須能回頭在這裡找到情報依據。',
+   tip:'<b>教學提醒：</b>情報要寫「事實＋意涵」，例如「單人戶增加（事實）→ 小坪數、可移動家具需求上升（意涵）」。只寫事實，下一張 SWOT 就接不上。',
+   checks:['企劃目的寫成「要解決什麼問題」，而不是「要辦什麼活動」','PEST 四面向各至少 1 條，且每條都附上「對本案的意涵」','競爭情報有點名具體的替代方案（含非同業）','消費者情報寫到痛點或待完成任務，而非只有人口特徵','內部資源同時列出「有的」與「缺的」']},
+  {n:2, key:'f2', name:'現況分析與策略目標設定表', short:'現況與目標', color:'#0E8F80', verb:'想清楚', q:'我們的處境如何？要往哪裡走、做到多少？',
+   usage:'將企劃構想／概念，轉化企劃案願景描述，透過 SWOT 現況分析，導引策略議題與企劃方針，指導進行目標設定、障礙分析、策略形成。',
+   role:'把情報「收斂」成策略方向與可衡量目標，是整份企劃的轉折點：上承情報，下啟 STP 與戰術。',
+   tip:'<b>教學提醒：</b>S/W 只能放「內部、可控」的因素；O/T 只能放「外部、不可控」的因素。交叉策略（SO/WO/ST/WT）必須是「動詞開頭的行動」，不能只是把兩格文字合併。',
+   checks:['S/W 皆來自表 1 的內部資源盤點','O/T 皆可在表 1 的外部／產業／競爭情報找到依據','四個交叉策略都是可執行的行動句','策略目標是方向性陳述；成果目標有數字與期限','每個關鍵障礙都有對應的對策辦法']},
+  {n:3, key:'f3', name:'STP 市場策略設計表', short:'STP 市場策略', color:'#C97A00', verb:'選對人', q:'要賣給誰？在他心中我們是什麼？',
+   usage:'以區隔變數切分市場、選定目標市場，並以知覺圖與定位聲明確立差異化位置。',
+   role:'把策略方向「落到顧客」：決定誰是主角、我們用什麼位置贏，後續 7Ps 與 AIDAS 都以此為準繩。',
+   tip:'<b>教學提醒：</b>區隔變數建議先用「顧客任務 Jobs-to-be-done」切，再用人口統計描述輪廓，避免只用年齡、收入切出看不出需求差異的區隔。',
+   checks:['至少比較 2–3 個區隔，且區隔之間需求真的不同','說明選擇目標市場的理由（規模、可及性、與優勢的契合）','知覺圖兩軸是顧客在乎的屬性，且競爭者來自表 1','定位聲明包含：對象、需求、品類、利益、差異點']},
+  {n:4, key:'f4', name:'行銷戰術及溝通活動設計表', short:'戰術與溝通', color:'#C93F66', verb:'做對事', q:'具體怎麼做？顧客從看到到滿意，每一步做什麼？',
+   usage:'以 7Ps 設計行銷組合，並沿著顧客心理程序（AIDAS）規劃溝通活動、成果目標與預算。',
+   role:'把定位「翻譯」成可執行戰術，並把表 2 的成果目標拆成各階段 KPI 與預算。',
+   tip:'<b>教學提醒：</b>檢查一致性——7Ps 的每一格都應該能說出「這怎麼支持我們的定位聲明？」；AIDAS 各階段 KPI 加總要能推到表 2 的成果目標。',
+   checks:['7Ps 每一格都對應定位聲明中的承諾','對策辦法（表 2）已轉成具體戰術','AIDAS 五階段都有活動、KPI、預算','最後階段（Action/Satisfaction）的 KPI 與表 2 成果目標一致','預算有加總，可直接帶入一頁企劃書']},
+  {n:5, key:'f5', name:'一頁企劃書', short:'一頁企劃書', color:'#6D51C9', verb:'說清楚', q:'用一頁讓決策者看懂：為何、做什麼、怎麼做、誰做、多少錢？',
+   usage:'將前四張表的關鍵結論濃縮為 5W2H 式的一頁提案，供主管或客戶決策。',
+   role:'整份企劃的「出口」。這裡不產生新資訊，每一格都是前四張表的濃縮與彙整。',
+   tip:'<b>教學提醒：</b>批改時可以反過來查：一頁企劃書的每一句話，能否指出它來自前面哪一張表的哪一格？找不到來源的句子，通常就是「憑空出現」的想法。',
+   checks:['企劃案名稱與表 1 核心概念一致','目的／目標＝表 1 企劃目的＋表 2 策略／成果目標','內容要點寫出 What（方案）與 Whom（表 3 目標市場）','實施方式含時程、地點與主要戰術','所需經費與表 4 預算加總一致']}
+];
+
+/* node: 用於關聯圖的「欄位節點」 */
+const NODES = {
+  'f1.title':{s:1,t:'標題／副標題'}, 'f1.purpose':{s:1,t:'企劃目的'}, 'f1.pest':{s:1,t:'外部大環境（PEST）'},
+  'f1.industry':{s:1,t:'產業情報'}, 'f1.comp':{s:1,t:'競爭情報'}, 'f1.consumer':{s:1,t:'消費者情報'}, 'f1.internal':{s:1,t:'內部情報／資源盤點'},
+  'f2.SW':{s:2,t:'S 優勢／W 劣勢'}, 'f2.OT':{s:2,t:'O 機會／T 威脅'}, 'f2.tows':{s:2,t:'交叉策略 SO·WO·ST·WT'},
+  'f2.goal':{s:2,t:'策略目標'}, 'f2.outcome':{s:2,t:'成果目標'}, 'f2.barrier':{s:2,t:'關鍵障礙 → 對策辦法'},
+  'f3.seg':{s:3,t:'市場區隔（JTBD／人口）'}, 'f3.target':{s:3,t:'目標市場 Targeting'}, 'f3.feature':{s:3,t:'產品／服務功能特色'},
+  'f3.map':{s:3,t:'市場定位（知覺圖）'}, 'f3.statement':{s:3,t:'定位聲明'},
+  'f4.7ps':{s:4,t:'行銷戰術 7Ps'}, 'f4.aidas':{s:4,t:'溝通活動 AIDAS'}, 'f4.kpi':{s:4,t:'各階段成果目標'}, 'f4.budget':{s:4,t:'行銷溝通預算'},
+  'f5.name':{s:5,t:'企劃案名稱'}, 'f5.why':{s:5,t:'1 目的／目標'}, 'f5.benefit':{s:5,t:'1 效益'}, 'f5.what':{s:5,t:'2 內容要點 What/Whom'},
+  'f5.how':{s:5,t:'3 實施方式 How/Where/When'}, 'f5.who':{s:5,t:'4 執行團隊 Who'}, 'f5.cost':{s:5,t:'5 所需經費 How much'}
+};
+
+const LINKS = [
+  ['f1.title','f5.name','核心概念延續為企劃案名稱，前後名稱要一致。'],
+  ['f1.purpose','f2.goal','企劃目的經 SWOT 檢驗後，轉化為方向明確的策略目標。'],
+  ['f1.purpose','f5.why','一頁企劃書的「目的」直接濃縮自企劃目的。'],
+  ['f1.pest','f2.OT','大環境趨勢是機會（O）與威脅（T）的主要來源。'],
+  ['f1.industry','f2.OT','產業結構與成長趨勢，轉為機會或威脅。'],
+  ['f1.comp','f2.OT','競爭者動態與替代品，構成威脅或市場空隙。'],
+  ['f1.comp','f3.map','競爭者成為知覺圖上的比較座標。'],
+  ['f1.consumer','f2.OT','未被滿足的需求，是外部機會的一種。'],
+  ['f1.consumer','f3.seg','消費者痛點與待完成任務，成為區隔變數（JTBD）。'],
+  ['f1.internal','f2.SW','資源盤點結果分類為優勢（S）與劣勢（W）。'],
+  ['f1.internal','f5.who','可動用的人力與夥伴，決定執行團隊的組成。'],
+  ['f2.SW','f2.tows','內部 S/W 與外部 O/T 交叉配對，才能產生策略方案。'],
+  ['f2.OT','f2.tows','外部 O/T 與內部 S/W 交叉配對，才能產生策略方案。'],
+  ['f2.tows','f2.goal','從交叉策略中收斂出主要策略議題，形成策略目標。'],
+  ['f2.tows','f3.target','SO 策略指出「最該優先攻的市場」。'],
+  ['f2.tows','f3.feature','交叉策略決定產品／服務要強化的功能與特色。'],
+  ['f2.goal','f2.outcome','方向性的策略目標，拆解為有數字、有期限的成果目標。'],
+  ['f2.goal','f3.statement','定位必須服務策略目標，不能各說各話。'],
+  ['f2.outcome','f2.barrier','檢視達成成果目標的關鍵障礙，並提出對策。'],
+  ['f2.outcome','f4.kpi','成果目標拆解為 AIDAS 各階段的 KPI。'],
+  ['f2.outcome','f5.benefit','成果目標換算為企劃效益。'],
+  ['f2.barrier','f4.7ps','對策辦法落實為具體的 7Ps 戰術。'],
+  ['f2.barrier','f5.how','對策成為實施方式中的關鍵作法與風險控管。'],
+  ['f3.seg','f3.target','比較各區隔的規模、需求強度與契合度後選定目標市場。'],
+  ['f3.target','f3.statement','定位聲明的第一句：「對於＿＿（目標市場）……」。'],
+  ['f3.feature','f3.statement','功能特色轉化為定位聲明中的「利益」。'],
+  ['f3.map','f3.statement','知覺圖上的空白位置，成為定位聲明中的差異點。'],
+  ['f3.target','f4.aidas','目標市場決定溝通對象、接觸點與媒體選擇。'],
+  ['f3.feature','f4.7ps','功能特色具體化為 Product（產品）設計。'],
+  ['f3.statement','f4.7ps','7Ps 每一格都要兌現定位聲明的承諾。'],
+  ['f3.statement','f4.aidas','定位聲明是所有溝通訊息的核心。'],
+  ['f3.target','f5.what','目標市場即一頁企劃書的 Whom。'],
+  ['f3.statement','f5.what','定位聲明濃縮為方案的核心價值主張。'],
+  ['f4.7ps','f5.how','7Ps 戰術彙整為實施方式。'],
+  ['f4.7ps','f5.who','People（人員）規劃對應執行團隊與分工。'],
+  ['f4.aidas','f5.how','AIDAS 活動依時序排成執行時程。'],
+  ['f4.aidas','f4.kpi','每個溝通活動都要有對應的成果目標。'],
+  ['f4.aidas','f4.budget','每個溝通活動都要編列預算。'],
+  ['f4.kpi','f5.benefit','各階段 KPI 彙整為可評估的效益指標。'],
+  ['f4.budget','f5.cost','行銷溝通預算加總後帶入所需經費。']
+];
+
+const THREADS = [
+  {id:'goal', name:'目標線（Why）', path:['f1.purpose','f2.goal','f2.outcome','f4.kpi','f5.benefit'],
+   say:'「為什麼做」一路被量化：從企劃目的，到策略目標、成果目標，再拆成各階段 KPI，最後成為效益。'},
+  {id:'cust', name:'顧客線（Whom）', path:['f1.consumer','f3.seg','f3.target','f4.aidas','f5.what'],
+   say:'「對誰做」從消費者情報開始，經區隔、選定目標市場，決定溝通活動對象，最後寫進內容要點。'},
+  {id:'strat', name:'策略線（What）', path:['f1.pest','f2.OT','f2.tows','f3.feature','f4.7ps','f5.how'],
+   say:'「做什麼」從大環境趨勢導出機會，交叉成策略，具體化為產品特色與 7Ps，最後成為實施方式。'},
+  {id:'pos', name:'定位線（差異化）', path:['f1.comp','f3.map','f3.statement','f4.7ps','f5.what'],
+   say:'「憑什麼贏」從競爭情報開始，在知覺圖找到空位，寫成定位聲明，再由 7Ps 一致兌現。'},
+  {id:'exec', name:'執行線（障礙與對策）', path:['f1.internal','f2.SW','f2.tows','f2.goal','f2.outcome','f2.barrier','f4.7ps','f5.how'],
+   say:'「做得到嗎」從資源盤點出發，認清優劣勢，設定目標後找出障礙，對策化為戰術與實施方式。'},
+  {id:'cost', name:'預算線（How much）', path:['f3.target','f4.aidas','f4.budget','f5.cost'],
+   say:'「花多少」由目標市場決定溝通活動，每個活動編列預算，加總成為所需經費。'}
+];
+
+/* 欄位（表單格）——guide: 說明；ask: 引導問題；pit: 常見錯誤；ex: IKEA 範例 */
+const F = {
+/* ---------- 表 1 ---------- */
+'f1.title':{node:'f1.title',label:'標題／副標題',hint:'一句話說出企劃的核心概念',
+  guide:'用主標題傳達「核心概念」，副標題補充「對象＋方案」。這是整份企劃的招牌，表 5 的企劃案名稱會沿用它。',
+  ask:['如果只能用 15 個字說明這個企劃，你會怎麼說？','副標題是否說清楚了「誰、做什麼」？'],
+  pit:'標題只寫產品名或活動名（例：「IKEA 租賃方案」），看不出核心概念與價值。',
+  ex:'<p><b>主標：</b>IKEA 輕租家——月付一杯咖啡錢，先擁有一個像樣的家</p><p><b>副標：</b>都會租屋族家具訂閱服務・雙北試行企劃</p>'},
+'f1.purpose':{node:'f1.purpose',label:'企劃目的',hint:'要解決什麼問題？為誰創造什麼價值？',
+  guide:'說明企劃要解決的「問題」與想達成的「改變」，可兼顧顧客面與公司面。之後會在表 2 被轉成策略目標。',
+  ask:['顧客現在遇到什麼困擾？','公司為什麼「現在」要做這件事？','做完之後，什麼會變得不一樣？'],
+  pit:'把手段當目的，例如「舉辦一場快閃活動」。活動是手段，目的應是活動要帶來的改變。',
+  ex:'<ul><li><b>顧客面：</b>解決租屋族「一次買斷負擔大、搬家帶不走、退租難處理大型家具」的痛點。</li><li><b>公司面：</b>建立「出租→回收→整新→再出租」的循環模式，創造經常性收入並強化永續品牌形象。</li><li><b>關係面：</b>把一次性購買轉為長期會員關係。</li></ul>'},
+'f1.pol':{node:'f1.pest',label:'政治／法律趨勢情報',hint:'政策、法規、管制的變化',
+  guide:'列出會影響本案的政策與法規，並寫出「對本案的意涵」。',
+  ask:['有哪些政策在鼓勵或限制這類商業模式？','契約、消保、環保法規有什麼要求？'],
+  pit:'只列法規名稱，沒有寫出它對本案是加分還是限制。',
+  ex:'<ul><li>政府推動 2050 淨零排放與循環經濟 → 循環商業模式具政策正當性。</li><li>租賃契約受消費者保護法定型化契約規範 → 損壞賠償、提前解約條款需透明。</li></ul>'},
+'f1.eco':{node:'f1.pest',label:'經濟／消費趨勢情報',hint:'所得、物價、消費型態',
+  guide:'描述影響購買力與消費方式的經濟趨勢。',
+  ask:['目標族群的可支配所得與支出結構如何？','消費者是否越來越接受「使用權取代所有權」？'],
+  pit:'引用總體數字卻沒連到目標族群的實際消費行為。',
+  ex:'<ul><li>都會房價高、購屋年齡延後 → 租屋期間拉長。</li><li>訂閱經濟普及（影音、軟體、汽車訂閱）→ 對「月付使用」接受度提高。</li><li>年輕族群偏好分期、降低一次性大額支出。</li></ul>'},
+'f1.soc':{node:'f1.pest',label:'社會／人口趨勢情報',hint:'人口結構、生活型態、價值觀',
+  guide:'描述人口結構與生活型態變化，以及它帶來的需求轉變。',
+  ask:['家庭型態、居住型態有什麼變化？','價值觀（如永續、極簡）有什麼轉變？'],
+  pit:'只寫「少子化、高齡化」等通用趨勢，與本案無直接關聯。',
+  ex:'<ul><li>單人戶、小家庭比例上升，北漂就業者多 → 小坪數、可移動家具需求。</li><li>工作與居住流動性高、換租頻繁。</li><li>年輕世代永續意識提升，對「不浪費」有好感。</li></ul>'},
+'f1.tech':{node:'f1.pest',label:'科技／技術趨勢情報',hint:'新技術、數位工具、通路科技',
+  guide:'找出能讓方案「做得到、做得好」的技術條件。',
+  ask:['哪些技術能降低營運成本或提升體驗？','顧客習慣用什麼數位管道決策？'],
+  pit:'列出熱門技術（如 AI、元宇宙），卻說不出在本案的具體用途。',
+  ex:'<ul><li>App 會員、線上訂閱與自動扣款已成熟 → 可全線上簽約。</li><li>AR 擺放模擬 → 租前先看效果，降低不確定感。</li><li>QR／條碼追蹤單件家具生命週期 → 管理出租與整新次數。</li></ul>'},
+'f1.industry':{node:'f1.industry',label:'產業情報分析',hint:'產業規模、結構、趨勢、標竿案例',
+  guide:'描述產業的成長性、結構變化與標竿案例，作為機會與威脅的依據。',
+  ask:['產業正在往哪個方向移動？','國內外有沒有可參考的先例？成功或失敗原因？'],
+  pit:'只抄產業產值，沒有說明結構性變化與本案的關聯。',
+  ex:'<ul><li>家具零售電商化、平價化，價格競爭激烈。</li><li>國外已有家具租賃／訂閱業者，驗證模式可行，但逆物流與整新成本是關鍵。</li><li>IKEA 集團 2019 年起在瑞士等市場試行家具租賃；2020 年推出全球回購轉售（Buy Back & Resell）；2024 年試行二手交易平台 IKEA Preowned。</li></ul>'},
+'f1.comp':{node:'f1.comp',label:'競爭情報分析',hint:'直接競爭者＋替代方案',
+  guide:'除了同業，也要列出顧客會拿來比較的「替代方案」。這些競爭者會出現在表 3 的知覺圖上。',
+  ask:['顧客不選我們時，會改用什麼方法解決問題？','各競爭者的強項與弱點？'],
+  pit:'只列同業品牌，忽略「什麼都不做」或「房東附家具」這類真正的替代方案。',
+  ex:'<ul><li><b>二手平台／社團：</b>價格最低，但品質不穩、需自行搬運。</li><li><b>平價家具零售：</b>價格接近，但仍需一次買斷。</li><li><b>房東附家具：</b>免費但款式老舊、無法選擇。</li><li><b>在地家具租賃業者：</b>有租賃彈性，但品牌與設計感較弱。</li></ul>'},
+'f1.consumer':{node:'f1.consumer',label:'消費者情報分析',hint:'誰？痛點？想完成什麼任務？',
+  guide:'描述顧客的需求、痛點、決策過程與「待完成任務（JTBD）」。這是表 3 區隔變數的來源。',
+  ask:['顧客在什麼情境下需要這個？','他們現在怎麼解決？哪裡不滿意？','他們真正想完成的「任務」是什麼？'],
+  pit:'只寫人口特徵（25–35 歲、上班族），沒有寫到需求與痛點。',
+  ex:'<ul><li><b>痛點：</b>剛搬進租屋處需一次添購大量家具；搬家時帶不走、賣不掉、丟棄要付費；自行組裝費時。</li><li><b>JTBD：</b>「讓租屋處快速變成像樣的家，而且搬走時不用煩惱家具。」</li><li><b>決策：</b>重視月負擔、外觀、是否需要綁約。</li></ul>'},
+'f1.internal':{node:'f1.internal',label:'內部情報／資源盤點',hint:'我們有什麼？缺什麼？',
+  guide:'盤點品牌、產品、通路、人才、資料、財務等資源，有的與缺的都要寫。之後在表 2 分成 S 與 W。',
+  ask:['哪些資源是競爭者難以模仿的？','要執行本案，哪些能力目前還不足？'],
+  pit:'只列優點，迴避缺口；或把外部趨勢誤寫成內部資源。',
+  ex:'<ul><li><b>有：</b>高品牌知名度與信任；模組化、可拆裝的產品設計；門市＋配送組裝服務；會員資料；回購轉售經驗。</li><li><b>缺：</b>大規模逆物流與清潔整新產能；租賃信用風控經驗；租賃專屬資訊系統。</li></ul>'},
+
+/* ---------- 表 2 ---------- */
+'f2.S':{node:'f2.SW',label:'S 優勢',hint:'內部、可控、相對競爭者較強',
+  guide:'從表 1 內部資源盤點中，挑出「相對競爭者」較強、且與本案相關的因素。',
+  ask:['這項優勢是相對誰而言？','顧客是否在乎這項優勢？'],
+  pit:'把外部機會寫進 S（例：「租屋人口多」是 O，不是 S）。',
+  ex:'<ul><li>S1 品牌信任與設計感</li><li>S2 模組化、可重複拆裝</li><li>S3 門市＋配送組裝網絡</li><li>S4 會員資料與 App</li></ul>'},
+'f2.W':{node:'f2.SW',label:'W 劣勢',hint:'內部、可控、相對較弱',
+  guide:'從表 1 內部資源盤點中，挑出執行本案時的能力缺口。',
+  ask:['如果競爭者要攻擊我們，會從哪裡下手？'],
+  pit:'劣勢寫得太空泛（例：「資源不足」），無法導出對策。',
+  ex:'<ul><li>W1 逆物流與整新產能不足</li><li>W2 缺乏租賃信用風控經驗</li><li>W3 低單價品項租賃毛利薄</li></ul>'},
+'f2.O':{node:'f2.OT',label:'O 機會',hint:'外部、不可控、有利',
+  guide:'來自表 1 的外部大環境、產業、競爭與消費者情報中，對本案有利的趨勢。',
+  ask:['這個機會是「趨勢」還是「一次性事件」？'],
+  pit:'把自己的計畫寫成機會（例：「我們可以推出 App」不是 O）。',
+  ex:'<ul><li>O1 租屋期拉長、租屋族擴大</li><li>O2 訂閱經濟接受度高</li><li>O3 淨零／循環經濟政策</li><li>O4 包租代管業者成長，可成合作通路</li></ul>'},
+'f2.T':{node:'f2.OT',label:'T 威脅',hint:'外部、不可控、不利',
+  guide:'來自表 1 外部情報中，對本案不利的趨勢或競爭壓力。',
+  ask:['最可能讓本案失敗的外部因素是什麼？'],
+  pit:'只寫「競爭激烈」，沒點出是誰、怎麼威脅。',
+  ex:'<ul><li>T1 二手平台價格極低</li><li>T2 平價家具可直接替代</li><li>T3 對寢具、布面家具的衛生疑慮</li><li>T4 損壞責任易生糾紛</li></ul>'},
+'f2.SO':{node:'f2.tows',label:'S×O 增長策略',hint:'用優勢抓住機會',
+  guide:'以優勢（S）去抓住機會（O），通常是最主要的攻擊策略。要寫成動詞開頭的行動。',
+  ask:['哪個優勢最能放大哪個機會？'],
+  pit:'只把 S 與 O 的文字合併，沒有形成行動。',
+  ex:'<p><span class="from" style="background:#0E8F80">S2+S3×O1+O4</span>以模組化家具推出「入住套組」月租方案，並與包租代管業者合作，直接進駐租屋案場。</p>'},
+'f2.WO':{node:'f2.tows',label:'W×O 扭轉策略',hint:'借機會補劣勢',
+  guide:'利用外部機會來改善內部劣勢。',
+  ask:['有哪些外部夥伴或趨勢可以補我們的不足？'],
+  pit:'寫成「加強劣勢」這種空話。',
+  ex:'<p><span class="from" style="background:#0E8F80">W1+W3×O3</span>與專業清潔／物流夥伴合建整新中心，先從耐用、低損耗品類（收納、桌椅、層架）切入。</p>'},
+'f2.ST':{node:'f2.tows',label:'S×T 多元／防禦策略',hint:'用優勢化解威脅',
+  guide:'以優勢來降低威脅的衝擊。',
+  ask:['我們的哪個優勢，是威脅來源做不到的？'],
+  pit:'忽略威脅，只談機會。',
+  ex:'<p><span class="from" style="background:#0E8F80">S1×T1+T2</span>以「IKEA 整新認證」品質保證區隔二手平台，並提供「租轉買」折抵，降低平價家具的替代吸引力。</p>'},
+'f2.WT':{node:'f2.tows',label:'W×T 防禦策略',hint:'降低劣勢與威脅的雙重風險',
+  guide:'找出劣勢與威脅交會的最大風險，提出防守或退出策略。',
+  ask:['最壞情況是什麼？如何避免？'],
+  pit:'沒有寫，或寫成「放棄」。',
+  ex:'<p><span class="from" style="background:#0E8F80">W2×T3+T4</span>不出租床墊、布面寢具等衛生敏感品；公告透明損耗費率表與基本保障方案，降低糾紛。</p>'},
+'f2.goal':{node:'f2.goal',label:'策略目標',hint:'方向性：要成為什麼？',
+  guide:'從交叉策略中收斂出 1–2 個主要方向，並呼應表 1 的企劃目的。',
+  ask:['所有交叉策略共同指向哪個方向？'],
+  pit:'策略目標寫成數字（那是成果目標）。',
+  ex:'<p>成為都會租屋族「入住第一站」，並建立可規模化的家具循環租賃模式。</p>'},
+'f2.outcome':{node:'f2.outcome',label:'成果目標',hint:'可衡量：多少、何時',
+  guide:'把策略目標拆成有數字、有期限的指標（SMART）。之後會在表 4 拆成各階段 KPI。',
+  ask:['怎麼知道策略目標達成了？','試行期多長？用什麼指標判斷要不要擴大？'],
+  pit:'沒有期限或基準值；或指標無法由本企劃影響。',
+  ex:'<p><b>試行 12 個月</b>（以下為教學假設值）：</p><ul><li>訂閱戶 3,000 戶</li><li>續租率 ≥ 60%</li><li>單件家具平均出租 ≥ 2 輪</li><li>NPS ≥ 40</li></ul>'},
+'f2.barrier':{node:'f2.barrier',label:'關鍵障礙',hint:'達成成果目標最大的阻礙',
+  guide:'針對成果目標，找出最可能阻礙達成的 2–3 個關鍵問題。',
+  ask:['如果 12 個月後沒達標，最可能的原因是什麼？'],
+  pit:'障礙與成果目標無關，或列太多無法聚焦。',
+  ex:'<ol style="margin:0;padding-left:18px"><li>消費者對「租家具」陌生，覺得不划算</li><li>逆物流與整新成本高</li><li>損壞與衛生爭議</li></ol>'},
+'f2.counter':{node:'f2.barrier',label:'對策辦法',hint:'一個障礙對應一個對策',
+  guide:'對每個關鍵障礙提出對策，這些對策會在表 4 被具體化為戰術。',
+  ask:['這個對策是否真的能移除障礙？成本是多少？'],
+  pit:'障礙與對策沒有一一對應。',
+  ex:'<ol style="margin:0;padding-left:18px"><li>推出「買 vs 租 vs 二手」線上試算器＋租轉買折抵</li><li>與夥伴合建整新中心，試行限雙北以控制物流半徑</li><li>品類篩選＋透明損耗費率＋數位交件檢查報告</li></ol>'},
+
+/* ---------- 表 3 ---------- */
+'f3.name':{node:'f3.feature',label:'商品／服務名稱',hint:'本表針對的商品或服務',
+  guide:'寫出本次 STP 分析針對的商品或服務名稱。',ask:['名稱能否傳達核心價值？'],pit:'與表 1 標題不一致。',
+  ex:'IKEA 輕租家（家具訂閱服務）'},
+'f3.jtbd':{node:'f3.seg',label:'顧客任務 Jobs-to-be-done',hint:'這群人想完成什麼任務？',
+  guide:'以顧客想完成的「任務」來區隔市場，比單用人口變數更能看出需求差異。來源是表 1 的消費者情報。',
+  ask:['他們在什麼情境下「僱用」我們的產品？','完成任務的成功標準是什麼？'],
+  pit:'三個區隔的任務其實一樣，只是年齡不同。',
+  ex:['「用最少預算，讓房間快速能住、也拍得好看；搬家時不用處理家具。」','「買房前先有一個像樣的家，不想買了之後不搭的家具。」','「到任即用、離開即走，不想為短期居住添購家具。」']},
+'f3.demo':{node:'f3.seg',label:'人口統計變數',hint:'這群人的輪廓',
+  guide:'用年齡、所得、居住型態等描述各區隔輪廓，方便估算規模與選擇媒體。',
+  ask:['這個區隔大約有多大？能接觸得到嗎？'],pit:'只有人口變數、沒有需求差異。',
+  ex:['22–30 歲・初入職場北漂族・獨居套房或合租・1–2 年換租一次','28–35 歲・雙薪伴侶・租兩房・存頭期款中','外派／交換學生／短期專案人員・居住 3–12 個月']},
+'f3.target':{node:'f3.target',label:'目標市場 Targeting',hint:'選誰？為什麼？',
+  guide:'從區隔中選出主要（與次要）目標市場，並說明理由：規模、需求強度、可及性、與我方優勢（表 2）的契合度。',
+  ask:['為什麼是這群人，而不是另一群？','我們的 SO 策略最適合打哪一群？'],
+  pit:'「全部都要」，或沒說明選擇理由。',
+  ex:'<ul><li><b>主要：區隔 A 北漂租屋族</b>——規模最大、換租頻繁、痛點最強，且可透過包租代管業者集中接觸（呼應 SO 策略）。</li><li><b>次要：區隔 C 短期居住者</b>——願付較高月租。</li><li>區隔 B 列為「租轉買」的未來經營對象。</li></ul>'},
+'f3.feature':{node:'f3.feature',label:'產品或服務的功能／特色',hint:'為目標市場提供什麼？',
+  guide:'針對目標市場的任務，列出產品與服務的關鍵功能和特色。',
+  ask:['每個特色分別解決目標顧客的哪個痛點？'],
+  pit:'列出所有功能，沒有聚焦於目標市場在乎的。',
+  ex:'<ul><li>三種「入住套組」：小資套房組／質感雙人組／短住快速組</li><li>6／12／24 個月方案，綁約越長月租越低</li><li>配送組裝＋退租回收一次包辦</li><li>期間可換款升級；期滿可「租轉買」折抵</li><li>整新品分級認證</li></ul>'},
+'f3.map':{node:'f3.map',label:'市場定位 Positioning（知覺圖）',hint:'選兩個顧客在乎的屬性當座標軸',
+  guide:'選擇兩個目標顧客最在乎的屬性當軸，把我們與表 1 的競爭者放上去，找出「有需求但沒人站」的位置。（可拖曳圓點）',
+  ask:['這兩個軸是顧客在乎的，還是我們自己在乎的？','我們的位置有沒有和競爭者重疊？'],
+  pit:'兩軸高度相關（如「價格」與「品質」），導致所有點排成一直線。',
+  ex:'map'},
+'f3.statement':{node:'f3.statement',label:'定位聲明',hint:'對於＿＿，＿＿是＿＿，能＿＿；不同於＿＿，我們＿＿',
+  guide:'用一句話整合：目標市場、需求、品類、核心利益、差異點。它是表 4 所有戰術的準繩。',
+  ask:['顧客聽完這句話，能否說出「為什麼選你而不是別人」？'],
+  pit:'寫成廣告標語；或差異點是競爭者也能宣稱的。',
+  ex:'<p>對於<b>經常換租、預算有限的都會租屋族</b>，<b>IKEA 輕租家</b>是一項<b>家具訂閱服務</b>，讓你以月付立即擁有有設計感的家、搬家時一通電話就回收；不同於二手平台與房東附家具，我們提供<b>IKEA 品質認證、到府組裝回收與租轉買的彈性</b>。</p>'},
+
+/* ---------- 表 4 ---------- */
+'f4.product':{node:'f4.7ps',label:'產品 Product',hint:'',guide:'產品組合、品質、規格、服務內容。須兌現定位中的「核心利益」。',ask:['產品哪一點最能兌現定位聲明？'],pit:'與表 3 功能特色不一致。',
+  ex:'三種入住套組＋單品加租；整新分級（A 級近新）；不含床墊、布面寢具。'},
+'f4.price':{node:'f4.7ps',label:'價格 Price',hint:'',guide:'定價方式、付款條件、折扣與心理定價。',ask:['價格是否支持定位（平價但不廉價）？'],pit:'只寫價格數字，沒有定價邏輯。',
+  ex:'小資套房組月租 NT$1,290 起（12 個月約，假設值）；押金一個月；已付租金部分比例可折抵租轉買。'},
+'f4.place':{node:'f4.7ps',label:'通路 Place',hint:'',guide:'顧客在哪裡接觸、購買、取得服務。',ask:['目標顧客平常在哪裡找租屋與家具資訊？'],pit:'只寫「線上＋線下」，沒有具體通路。',
+  ex:'App／官網線上訂閱；雙北門市體驗區；與包租代管業者、租屋平台合作進駐。'},
+'f4.promotion':{node:'f4.7ps',label:'推廣 Promotion',hint:'',guide:'廣告、公關、社群、促銷的整體方向（細部活動寫在下方 AIDAS）。',ask:['溝通的核心訊息是什麼？'],pit:'與 AIDAS 重複或矛盾。',
+  ex:'核心訊息「先擁有家，不用先擁有家具」；短影音＋KOL 租屋改造＋試算器導流。'},
+'f4.people':{node:'f4.7ps',label:'人員訓練 People',hint:'',guide:'第一線人員的角色、能力與訓練。',ask:['哪個接觸點最容易讓顧客失望？'],pit:'服務業企劃常漏掉此欄。',
+  ex:'門市「訂閱專員」；配送組裝人員訓練交件檢查與損耗說明；客服處理換款與退租。'},
+'f4.physical':{node:'f4.7ps',label:'有形展示 Physical Evidence',hint:'',guide:'讓無形服務「看得見」的線索：環境、物件、文件。',ask:['顧客憑什麼相信整新品是乾淨的？'],pit:'只寫「店面裝潢」。',
+  ex:'門市「租屋實境展間」；整新認證吊牌；附照片的數位交件檢查報告。'},
+'f4.process':{node:'f4.7ps',label:'服務流程 Process',hint:'',guide:'顧客從申請到結束的完整流程與關鍵步驟。',ask:['流程中哪一步最容易卡住？'],pit:'只寫公司內部作業，沒有從顧客角度描述。',
+  ex:'選套組 → 線上身分／信用驗證 → 7 天內配送組裝 → 每月自動扣款 → 換款／續租／退租回收／租轉買。'},
+'f4.kpi':{node:'f4.kpi',label:'成果目標（達成／創造／改變）',hint:'',guide:'每個階段的 KPI。最後階段的 KPI 應與表 2 成果目標一致。',ask:['各階段 KPI 能否一路推到最終成果目標？'],pit:'只有曝光數，沒有轉換與滿意指標。',ex:''},
+'f4.budget':{node:'f4.budget',label:'行銷溝通預算',hint:'',guide:'每個活動的預算，加總後帶入表 5 所需經費。',ask:['預算分配是否與各階段的重要性相符？'],pit:'沒有加總，或與表 5 金額對不上。',ex:''},
+'f4.A':{node:'f4.aidas',label:'引起注意／建立認知 Attention',hint:'',guide:'讓目標市場「知道有這件事」。',ask:['目標顧客最常出現在哪些媒體？'],pit:'',
+  ex:['「北漂第一個家，月付 1,290」短影音；租屋平台橫幅','曝光 500 萬次','120 萬','搭配 6–9 月畢業、開學租屋旺季']},
+'f4.I':{node:'f4.aidas',label:'增加興趣 Interest',hint:'',guide:'讓顧客想進一步了解。',ask:['什麼內容能讓他停下來看？'],pit:'',
+  ex:['「買 vs 租 vs 二手」線上試算器；AR 擺放模擬','試算器使用 3 萬次','40 萬','試算結果可一鍵存成會員名單']},
+'f4.D':{node:'f4.aidas',label:'刺激慾望 Desire',hint:'',guide:'讓顧客覺得「我想要」。',ask:['什麼證據能讓他相信？'],pit:'',
+  ex:['門市租屋實境展間；KOL 租屋改造開箱','名單 8,000 筆','60 萬','展間同步上架 360° 線上看屋']},
+'f4.Ac':{node:'f4.aidas',label:'促使行動 Action',hint:'',guide:'降低行動門檻，促成訂閱。',ask:['顧客最後猶豫的是什麼？'],pit:'',
+  ex:['早鳥首月 0 元；包租代管案場簽約即享套組優惠','訂閱 3,000 戶','50 萬','首月免租補貼另列 150 萬']},
+'f4.Sa':{node:'f4.aidas',label:'提高滿意 Satisfaction',hint:'',guide:'讓顧客滿意、續租並推薦。',ask:['什麼會讓他續租或推薦朋友？'],pit:'',
+  ex:['入住 7 天關懷回訪；免費換款一次；推薦好友雙方各折 300 元','續租率 ≥ 60%、NPS ≥ 40','30 萬','行銷溝通預算合計 300 萬']},
+
+/* ---------- 表 5 ---------- */
+'f5.name':{node:'f5.name',label:'企劃案名稱',hint:'',guide:'沿用表 1 的核心概念，讓決策者一眼看懂。',ask:['名稱是否同時包含「對象＋方案」？'],pit:'與表 1 標題不一致。',
+  ex:'IKEA 輕租家——都會租屋族家具訂閱試行企劃'},
+'f5.why':{node:'f5.why',label:'目的／目標',hint:'',guide:'濃縮表 1 企劃目的＋表 2 策略目標與成果目標。',ask:['決策者 30 秒內能否看懂要達成什麼？'],pit:'與表 2 數字不一致。',
+  ex:'<ul><li>解決租屋族「買斷負擔重、搬家帶不走」的痛點</li><li>成為租屋族入住第一站，建立循環租賃模式</li><li>12 個月：3,000 訂閱戶、續租率 ≥ 60%（假設值）</li></ul>'},
+'f5.benefit':{node:'f5.benefit',label:'效益',hint:'',guide:'由表 2 成果目標與表 4 KPI 推估質化與量化效益。',ask:['效益能否被衡量？'],pit:'只寫「提升品牌形象」等無法驗證的效益。',
+  ex:'<ul><li><b>量化（試算）：</b>3,000 戶 × 平均月租 1,500 元 × 12 個月 ≈ 年訂閱收入 5,400 萬元</li><li><b>循環：</b>單件家具出租 ≥ 2 輪，延長使用壽命</li><li><b>關係：</b>NPS ≥ 40，建立租轉買與未來購屋族群的長期關係</li></ul>'},
+'f5.what':{node:'f5.what',label:'內容要點 What／Whom',hint:'',guide:'說明方案內容（What）與對象（Whom，來自表 3 目標市場）及核心價值主張。',ask:['對象與方案是否與表 3 一致？'],pit:'Whom 寫成「所有消費者」。',
+  ex:'<ul><li><b>Whom：</b>主要為雙北 22–30 歲北漂租屋族；次要為短期居住者</li><li><b>What：</b>三種入住套組月租方案，含配送組裝、換款、退租回收與租轉買</li><li><b>價值主張：</b>以 IKEA 品質與全包服務，讓租屋族「先擁有家，不用先擁有家具」</li></ul>'},
+'f5.how':{node:'f5.how',label:'實施方式 How／Where／When',hint:'',guide:'彙整表 4 的 7Ps 與 AIDAS，依時程寫出地點與作法；也納入表 2 的對策作為風險控管。',ask:['時程是否合理？有沒有關鍵里程碑與決策點？'],pit:'只有活動清單，沒有時程與地點。',
+  ex:'<ul><li><b>M1–M2 準備期：</b>品類篩選、整新中心合作、契約與損耗費率設計、系統開發</li><li><b>M3–M5 上線期（6–9 月旺季）：</b>雙北門市＋線上同步上線；包租代管案場合作；Attention→Action 活動</li><li><b>M6–M12 經營期：</b>Satisfaction 活動、續租與換款；M12 檢核成果目標，決定是否擴點中南部</li></ul>'},
+'f5.who':{node:'f5.who',label:'執行團隊 Who',hint:'',guide:'依表 1 內部資源與表 4 People 規劃團隊與分工。',ask:['每項工作都有負責人嗎？外部夥伴是誰？'],pit:'只寫「行銷部」。',
+  ex:'<ul><li>專案經理（行銷部）</li><li>商品／採購：套組規劃</li><li>物流與整新：外部合作夥伴</li><li>財務風控：信用審核、損耗費率</li><li>數位團隊：App、試算器</li><li>門市訂閱專員、客服</li></ul>'},
+'f5.cost':{node:'f5.cost',label:'所需經費 How much',hint:'',guide:'行銷溝通預算（表 4）加上建置、營運等費用。',ask:['行銷預算是否與表 4 加總一致？'],pit:'只列行銷費用，忽略系統、物流等建置成本。',
+  ex:'<table style="width:100%;font-size:13px;border-collapse:collapse"><tr><td>行銷溝通（表 4）</td><td style="text-align:right">300 萬</td></tr><tr><td>首月免租補貼</td><td style="text-align:right">150 萬</td></tr><tr><td>系統／App 開發</td><td style="text-align:right">400 萬</td></tr><tr><td>整新中心與逆物流</td><td style="text-align:right">800 萬</td></tr><tr><td>人員訓練</td><td style="text-align:right">100 萬</td></tr><tr><td>預備金（約 10%）</td><td style="text-align:right">175 萬</td></tr><tr style="border-top:1px solid #999;font-weight:700"><td>合計（假設值）</td><td style="text-align:right">1,925 萬</td></tr></table>'}
+};
+
+/* 知覺圖點位：x = 使用彈性（0 綁定 → 1 彈性），y = 品質／設計感（0 低 → 1 高） */
+const MAP_PTS = [
+  {t:'IKEA 輕租家', x:.82, y:.80, me:true},
+  {t:'購買 IKEA 新品', x:.22, y:.78},
+  {t:'二手平台', x:.72, y:.24},
+  {t:'房東附家具', x:.18, y:.18},
+  {t:'平價家具零售', x:.30, y:.45},
+  {t:'在地租賃業者', x:.62, y:.50}
+];
+
+return {STEPS:STEPS,NODES:NODES,LINKS:LINKS,F:F,MAP_PTS:MAP_PTS};
+})();
 (function(){
 var SHEET_URL='https://script.google.com/macros/s/AKfycbzaS_naudhlfp07W-BzUyaMbsDMr2aDx5sxNR09aQ0imG4ZGpZMFz0nc1T5bekYGAJB/exec'; // 部署 Apps Script 後,把網址貼在引號內,全組就自動同步並用學號登入
 var KEY='tbsa15-form-v1';
@@ -279,6 +634,7 @@ function done(k){
 }
 function isFilled(v){return Array.isArray(v)?v.length>0:(v!==''&&v!==undefined&&v!==null&&v!==false)}
 function applyChanged(ch){
+  setTimeout(updateChecks,0);
   ch.forEach(function(k){
     if(k==='pts'){if($('#map')&&!drag)drawMap();return}
     var el=document.getElementById(k);if(!el||!el.dataset||el.dataset.k!==k||el===document.activeElement)return;
@@ -301,7 +657,7 @@ function stepOfKey(){
 function contributors(){
   var sk=stepOfKey(),by={};
   Object.keys(A).forEach(function(k){
-    var a=A[k];if(!a||!isFilled(S[k]))return;
+    var a=A[k];if(!a||!isFilled(S[k])||/^ck\d_\d$/.test(k))return;
     var r=by[a.by]||(by[a.by]={n:0,at:0,steps:{}});
     r.n++;if(a.at>r.at)r.at=a.at;r.steps[sk[k]||'其他']=1;
   });
@@ -351,6 +707,7 @@ function labelOf(k){
     STEPS.forEach(function(st){(st.secs||[]).forEach(function(sc){sc.f.forEach(function(f){LBL[f.k]=st.n+' '+f.l})})});
     SW.forEach(function(x){LBL['sw_'+x[0]]='STEP 2 SWOT '+x[1]});
     ['a','b','c'].forEach(function(c){SEGV.forEach(function(r){LBL['seg_'+c+'_'+r[0]]='STEP 3 市場區隔'+c.toUpperCase()+' '+r[1]});LBL['seg_'+c+'_x']='STEP 3 市場區隔'+c.toUpperCase()+' 自訂變數'});
+    TEACH.STEPS.forEach(function(t,si){t.checks.forEach(function(c,i){LBL['ck'+(si+1)+'_'+i]='STEP '+(si+1)+' 完成檢核 · '+c})});
     P7.forEach(function(q){LBL['p7_'+q[0]]='STEP 4 7Ps '+q[1]});
     AIDAS.forEach(function(a,i){var n=a[0].split(' / ')[0];LBL['ai'+i+'_act']='STEP 4 '+n+' 行動溝通活動';LBL['ai'+i+'_goal']='STEP 4 '+n+' 成果目標';LBL['ai'+i+'_bud']='STEP 4 '+n+' 預算';LBL['ai'+i+'_note']='STEP 4 '+n+' 備註'});
   }
@@ -520,9 +877,92 @@ function coverProgress(){
   return {n:n,total:tot};
 }
 
+/* ---------- teaching notes (說明面板) ---------- */
+var HELPMAP={title:'f1.title',purpose:'f1.purpose',pol:'f1.pol',eco:'f1.eco',soc:'f1.soc',tec:'f1.tech',ind:'f1.industry',compete:'f1.comp',cons:'f1.consumer',inner:'f1.internal',goal_s:'f2.goal',goal_r:'f2.outcome',goal_b:'f2.barrier',plan:'f2.counter',target:'f3.target',feat:'f3.feature',posstmt:'f3.statement',p7_prod:'f4.product',p7_price:'f4.price',p7_promo:'f4.promotion',p7_place:'f4.place',p7_ppl:'f4.people',p7_phys:'f4.physical',p7_proc:'f4.process',o_goal:'f5.why',o_eff:'f5.benefit'};
+var SWHELP={s:'f2.S',w:'f2.W',o:'f2.O',t:'f2.T',so:'f2.SO',wo:'f2.WO',st:'f2.ST',wt:'f2.WT'};
+var AIDHELP=['f4.A','f4.I','f4.D','f4.Ac','f4.Sa'];
+var NODEEL={'f1.title':'title','f1.purpose':'purpose','f1.pest':'pol','f1.industry':'ind','f1.comp':'compete','f1.consumer':'cons','f1.internal':'inner','f2.SW':'sw_s','f2.OT':'sw_o','f2.tows':'sw_so','f2.goal':'goal_s','f2.outcome':'goal_r','f2.barrier':'goal_b','f3.seg':'seg_a_jtbd','f3.target':'target','f3.feature':'feat','f3.map':'map','f3.statement':'posstmt','f4.7ps':'p7_prod','f4.aidas':'ai0_act','f4.kpi':'ai0_goal','f4.budget':'ai0_bud','f5.name':'o_name','f5.why':'o_goal','f5.benefit':'o_eff','f5.what':'o_what','f5.how':'o_how','f5.who':'o_who','f5.cost':'o_cost'};
+var AIDLABELS=['行動溝通活動','成果目標','行銷溝通預算','備註'],SEGLABELS=['區隔 A','區隔 B','區隔 C'];
+function hb(id){return '<button type="button" class="hbtn" data-help="'+id+'" aria-label="填寫說明" title="填寫說明">?</button>'}
+function mapSvg(){
+  var W=300,H=230,pad=26;
+  var g=TEACH.MAP_PTS.map(function(p){
+    var cx=pad+p.x*(W-2*pad),cy=H-pad-p.y*(H-2*pad);
+    return '<g transform="translate('+cx+','+cy+')"><circle r="'+(p.me?8:6)+'" style="fill:'+(p.me?'var(--accent)':'var(--mute)')+';stroke:var(--surface);stroke-width:2"/><text x="10" y="4" font-size="11" font-weight="'+(p.me?700:500)+'" style="fill:var(--ink)">'+esc(p.t)+'</text></g>';
+  }).join('');
+  return '<svg viewBox="0 0 300 230" style="width:100%;max-width:320px;display:block;margin:6px auto"><rect x="26" y="26" width="248" height="178" style="fill:var(--bg);stroke:var(--line)"/><line x1="150" y1="26" x2="150" y2="204" style="stroke:var(--mute)"/><line x1="26" y1="115" x2="274" y2="115" style="stroke:var(--mute)"/><text x="26" y="222" font-size="10.5" style="fill:var(--mute)">← 綁定(需買斷)</text><text x="274" y="222" font-size="10.5" text-anchor="end" style="fill:var(--mute)">使用彈性高 →</text><text x="150" y="16" font-size="10.5" text-anchor="middle" style="fill:var(--mute)">↑ 品質 / 設計感高</text>'+g+'</svg>';
+}
+function helpHTML(id){
+  var f=TEACH.F[id];if(!f)return '';
+  var node=f.node,s=TEACH.NODES[node].s;
+  var h='<h3><span class="pill" style="background:var(--c'+s+')">表'+s+'</span> '+esc(f.label)+'</h3>';
+  if(f.hint)h+='<p class="dmute" style="margin-top:4px">'+esc(f.hint)+'</p>';
+  h+='<h4>怎麼填</h4><p>'+esc(f.guide)+'</p>';
+  if(f.ask&&f.ask.length)h+='<h4>引導問題</h4><ul>'+f.ask.map(function(a){return '<li>'+esc(a)+'</li>'}).join('')+'</ul>';
+  if(f.pit)h+='<h4>常見錯誤</h4><div class="pit">'+esc(f.pit)+'</div>';
+  var ex=f.ex,exh='';
+  if(ex==='map')exh=mapSvg();
+  else if(Array.isArray(ex)){var labs=(id==='f3.jtbd'||id==='f3.demo')?SEGLABELS:AIDLABELS;exh='<ul class="exl">'+ex.map(function(t,i){return '<li><b>'+esc(labs[i]||'')+'</b>'+esc(t)+'</li>'}).join('')+'</ul>'}
+  else if(ex)exh=ex;
+  if(exh)h+='<details class="exd"><summary>看 IKEA 範例</summary><div class="exb">'+exh+'<p class="exn">教學用假想企劃,非 IKEA 官方計畫;名稱、價格、戶數、預算等數字皆為假設值,請換成你們自己蒐集的資料。</p></div></details>';
+  var ins=TEACH.LINKS.filter(function(l){return l[1]===node}),outs=TEACH.LINKS.filter(function(l){return l[0]===node});
+  function li(l,dir){var o=dir==='in'?l[0]:l[1],n=TEACH.NODES[o];return '<li data-jump="'+o+'"><b style="color:var(--c'+n.s+')">表'+n.s+'・'+esc(n.t)+'</b><small>'+esc(l[2])+'</small></li>'}
+  h+='<h4>⬅ 承接自</h4>'+(ins.length?'<ul class="rel">'+ins.map(function(l){return li(l,'in')}).join('')+'</ul>':'<p class="dmute">外部蒐集 / 本表起點</p>');
+  h+='<h4>輸出到 ➡</h4>'+(outs.length?'<ul class="rel">'+outs.map(function(l){return li(l,'out')}).join('')+'</ul>':'<p class="dmute">最終產出</p>');
+  return h;
+}
+var helpId='';
+function openHelp(id){
+  if(!TEACH.F[id])return;
+  helpId=id;$('#dBody').innerHTML=helpHTML(id);$('#drawer').hidden=false;$('#drawer').scrollTop=0;
+  document.body.classList.add('has-drawer');
+  document.querySelectorAll('.hbtn').forEach(function(b){b.setAttribute('aria-expanded',b.dataset.help===id?'true':'false')});
+}
+function closeHelp(){
+  helpId='';$('#drawer').hidden=true;document.body.classList.remove('has-drawer');
+  document.querySelectorAll('.hbtn').forEach(function(b){b.setAttribute('aria-expanded','false')});
+}
+function jumpNode(node){
+  var n=TEACH.NODES[node];if(!n)return;
+  var pid='step'+n.s;
+  if(cur!==pid)renderPage(pid,true);
+  setTimeout(function(){
+    var el=document.getElementById(NODEEL[node]);
+    if(el){var c=el.closest('.fld,.cell,td,.map')||el;el.scrollIntoView({behavior:'smooth',block:'center'});c.classList.remove('flash');void c.offsetWidth;c.classList.add('flash')}
+    var fid=Object.keys(TEACH.F).filter(function(k){return TEACH.F[k].node===node})[0];if(fid)openHelp(fid);
+  },80);
+}
+function chips(nodes){
+  var seen={},out=[];
+  nodes.forEach(function(n){if(!seen[n]){seen[n]=1;out.push('<button type="button" class="rchip" data-jump="'+n+'"><b style="color:var(--c'+TEACH.NODES[n].s+')">表'+TEACH.NODES[n].s+'</b> '+esc(TEACH.NODES[n].t)+'</button>')}});
+  return out.join('');
+}
+function stepIntro(idx){
+  var t=TEACH.STEPS[idx-1],N=TEACH.NODES;
+  var inc=TEACH.LINKS.filter(function(l){return N[l[1]].s===idx&&N[l[0]].s<idx}).map(function(l){return l[0]});
+  var out=TEACH.LINKS.filter(function(l){return N[l[0]].s===idx&&N[l[1]].s>idx}).map(function(l){return l[1]});
+  return '<div class="intro"><span class="pill" style="background:var(--c'+idx+')">STEP '+idx+'・'+esc(t.verb)+'</span>'+
+   '<p><b>核心問題:</b>'+esc(t.q)+'</p><p><b>在整份企劃中的角色:</b>'+esc(t.role)+'</p>'+
+   '<div class="rels"><span class="rl">⬅ 承接自</span>'+(inc.length?chips(inc):'<span class="dmute">本表是起點,情報來自外部蒐集與內部盤點</span>')+'</div>'+
+   '<div class="rels"><span class="rl">輸出到 ➡</span>'+(out.length?chips(out):'<span class="dmute">本表是終點,彙整前四表交給決策者</span>')+'</div></div>';
+}
+function stepCheck(idx){
+  var t=TEACH.STEPS[idx-1];
+  var h='<section class="blk"><h3>完成檢核<span id="cknum" class="ckn"></span></h3><div class="chk">';
+  t.checks.forEach(function(c,i){h+='<label class="cki"><input type="checkbox" id="ck'+idx+'_'+i+'" data-k="ck'+idx+'_'+i+'"><span>'+esc(c)+'</span></label>'});
+  return h+'</div><div class="cprog"><i id="ckbar" style="background:var(--c'+idx+')"></i></div><div class="tipbox">'+t.tip+'</div></section>';
+}
+function updateChecks(){
+  var m=cur.match(/^step(\d)$/);if(!m)return;
+  var n=+m[1],t=TEACH.STEPS[n-1],c=0;
+  t.checks.forEach(function(_,i){if(S['ck'+n+'_'+i])c++});
+  var b=$('#ckbar');if(b)b.style.width=Math.round(c/t.checks.length*100)+'%';
+  var x=$('#cknum');if(x)x.textContent=c+' / '+t.checks.length;
+}
+
 /* ---------- field renderers ---------- */
 function fld(f){
-  var lab='<span class="lb">'+esc(f.l)+(f.sub?'<small>'+esc(f.sub)+'</small>':'')+'</span>';
+  var lab='<span class="lb">'+esc(f.l)+(HELPMAP[f.k]?hb(HELPMAP[f.k]):'')+(f.sub?'<small>'+esc(f.sub)+'</small>':'')+'</span>';
   var ctl=f.line?'<input type="text" id="'+f.k+'" data-k="'+f.k+'" placeholder="'+esc(f.ph||'')+'">'
     :'<textarea id="'+f.k+'" data-k="'+f.k+'" rows="'+(f.rows||3)+'" placeholder="'+esc(f.ph||'')+'"></textarea>';
   return '<label class="fld">'+lab+ctl+'<span class="by" data-by="'+f.k+'"></span></label>';
@@ -541,7 +981,7 @@ function renderSwot(){
   var map={};SW.forEach(function(x){map[x[0]]=x});
   function cell(k){
     var x=map[k],cross=k.length>1;
-    return '<div class="cell '+(cross?'x':'')+'"><div class="hd"><span>'+esc(x[1])+'</span><small>'+esc(x[2])+'</small></div>'+ta('sw_'+k,4)+'</div>';
+    return '<div class="cell '+(cross?'x':'')+'"><div class="hd"><span>'+esc(x[1])+'</span><span class="hr"><small>'+esc(x[2])+'</small>'+hb(SWHELP[k])+'</span></div>'+ta('sw_'+k,4)+'</div>';
   }
   h+=cell('s')+cell('w');
   h+=cell('o')+cell('so')+cell('wo');
@@ -549,12 +989,12 @@ function renderSwot(){
   return h+'</div></section>';
 }
 function renderStp(){
-  var h='<section class="blk"><div class="fld"><label class="lb" for="prodname">商品 / 服務名稱</label><input type="text" id="prodname" data-k="prodname" placeholder="例:書循環"></div></section>';
+  var h='<section class="blk"><div class="fld"><span class="lb"><label for="prodname">商品 / 服務名稱</label>'+hb('f3.name')+'</span><input type="text" id="prodname" data-k="prodname" placeholder="例:書循環"></div></section>';
   h+='<section class="blk"><h3>市場區隔(Segmentation)</h3><div class="scroll"><table class="t"><thead><tr><th class="rh">區隔變數</th>';
   ['a','b','c'].forEach(function(c){h+='<th>市場區隔 '+c.toUpperCase()+'</th>'});
   h+='</tr></thead><tbody>';
   SEGV.forEach(function(r){
-    h+='<tr><th>'+esc(r[1])+(r[2]?'<small>'+esc(r[2])+'</small>':'')+'</th>';
+    h+='<tr><th>'+esc(r[1])+hb(r[0]==='jtbd'?'f3.jtbd':'f3.demo')+(r[2]?'<small>'+esc(r[2])+'</small>':'')+'</th>';
     ['a','b','c'].forEach(function(c){h+='<td>'+ta('seg_'+c+'_'+r[0],3)+'</td>'});
     h+='</tr>';
   });
@@ -564,7 +1004,7 @@ function renderStp(){
   h+='<section class="blk"><div class="grid g2">'+
     fld(F('target','目標市場(Targeting)',{rows:5,sub:'從上面選出要主攻的區隔,並說明理由'}))+
     fld(F('feat','產品或服務的功能 / 特色',{rows:5}))+'</div></section>';
-  h+='<section class="blk"><h3>市場定位(Positioning)</h3>'+
+  h+='<section class="blk"><h3>市場定位(Positioning)'+hb('f3.map')+'</h3>'+
     '<div class="axes">'+
     '<label class="fld"><span class="lb">上方軸</span><input type="text" id="ax_t" data-k="ax_t" placeholder="例:價格高"></label>'+
     '<label class="fld"><span class="lb">下方軸</span><input type="text" id="ax_b" data-k="ax_b" placeholder="例:價格低"></label>'+
@@ -580,21 +1020,21 @@ function renderP7(){
   var h='<section class="blk"><h3>行銷戰術設計(7Ps)</h3><div class="grid g3">';
   P7.forEach(function(p){h+=fld(F('p7_'+p[0],p[1]+'('+p[2]+')',{rows:4}))});
   h+='</div></section>';
-  h+='<section class="blk"><h3>行銷活動設計</h3><div class="scroll"><table class="t"><thead><tr><th class="rh">顧客心理程序<small>AIDAS</small></th><th>行動溝通活動</th><th>成果目標<small>達成 / 創造 / 改變</small></th><th style="width:140px">行銷溝通預算<small>元</small></th><th>備註</th></tr></thead><tbody>';
+  h+='<section class="blk"><h3>行銷活動設計</h3><div class="scroll"><table class="t"><thead><tr><th class="rh">顧客心理程序<small>AIDAS</small></th><th>行動溝通活動</th><th>成果目標'+hb('f4.kpi')+'<small>達成 / 創造 / 改變</small></th><th style="width:140px">行銷溝通預算'+hb('f4.budget')+'<small>元</small></th><th>備註</th></tr></thead><tbody>';
   AIDAS.forEach(function(a,i){
-    h+='<tr><th>'+esc(a[0])+'<small>'+esc(a[1])+'</small></th><td>'+ta('ai'+i+'_act',3)+'</td><td>'+ta('ai'+i+'_goal',3)+'</td>'+
+    h+='<tr><th>'+esc(a[0])+hb(AIDHELP[i])+'<small>'+esc(a[1])+'</small></th><td>'+ta('ai'+i+'_act',3)+'</td><td>'+ta('ai'+i+'_goal',3)+'</td>'+
     '<td><input type="text" inputmode="numeric" id="ai'+i+'_bud" data-k="ai'+i+'_bud" class="bud" placeholder="0" aria-label="預算"></td><td>'+ta('ai'+i+'_note',3)+'</td></tr>';
   });
   h+='</tbody></table></div><div class="total"><span>預算合計</span><b id="sum">0</b><span>元</span></div></section>';
   return h;
 }
 function renderOne(){
-  return '<section class="blk"><div class="fld"><label class="lb" for="o_name">企劃案名稱</label><input type="text" id="o_name" data-k="o_name"></div><div class="hint"><button class="btn sm" id="fillName" type="button">帶入封面題目</button></div></section>'+
+  return '<section class="blk"><div class="fld"><span class="lb"><label for="o_name">企劃案名稱</label>'+hb('f5.name')+'</span><input type="text" id="o_name" data-k="o_name"></div><div class="hint"><button class="btn sm" id="fillName" type="button">帶入封面題目</button></div></section>'+
   '<section class="blk"><h3>1、目的與效益(Why / Evaluate)</h3><div class="grid g2">'+fld(F('o_goal','目的 / 目標',{rows:5}))+fld(F('o_eff','效益',{rows:5}))+'</div></section>'+
-  '<section class="blk"><div class="grid g2"><div><h3 style="margin:0 0 8px;font-size:14px;background:var(--head);padding:5px 10px;border-radius:4px">2、內容要點(What)</h3>'+ta('o_what',12)+'</div>'+
-  '<div style="display:flex;flex-direction:column;gap:12px;min-width:0"><div><h3 style="margin:0 0 8px;font-size:14px;background:var(--head);padding:5px 10px;border-radius:4px">4、執行團隊(Who)</h3>'+ta('o_who',5)+'</div>'+
-  '<div><h3 style="margin:0 0 8px;font-size:14px;background:var(--head);padding:5px 10px;border-radius:4px">5、所需經費(How much)</h3>'+ta('o_cost',4)+'<div class="hint"><button class="btn sm" id="fillCost" type="button">帶入 STEP 4 預算合計</button></div></div></div></div></section>'+
-  '<section class="blk"><h3>3、實施方式(How / Where / When)</h3><div class="grid">'+ta('o_how',6,'時程、地點、執行步驟')+'</div></section>';
+  '<section class="blk"><div class="grid g2"><div><h3 style="margin:0 0 8px;font-size:14px;background:var(--head);padding:5px 10px;border-radius:4px">2、內容要點(What)'+hb('f5.what')+'</h3>'+ta('o_what',12)+'</div>'+
+  '<div style="display:flex;flex-direction:column;gap:12px;min-width:0"><div><h3 style="margin:0 0 8px;font-size:14px;background:var(--head);padding:5px 10px;border-radius:4px">4、執行團隊(Who)'+hb('f5.who')+'</h3>'+ta('o_who',5)+'</div>'+
+  '<div><h3 style="margin:0 0 8px;font-size:14px;background:var(--head);padding:5px 10px;border-radius:4px">5、所需經費(How much)'+hb('f5.cost')+'</h3>'+ta('o_cost',4)+'<div class="hint"><button class="btn sm" id="fillCost" type="button">帶入 STEP 4 預算合計</button></div></div></div></div></section>'+
+  '<section class="blk"><h3>3、實施方式(How / Where / When)'+hb('f5.how')+'</h3><div class="grid">'+ta('o_how',6,'時程、地點、執行步驟')+'</div></section>';
 }
 function renderCover(){
   var h='<div class="kicker">第 15 屆 TBSA 全國大專創新企劃競賽</div><h1>封面與目錄</h1><p class="use">先填寫參賽資料,再依序完成五張表單。每一欄下方會顯示最後編輯的人與時間。</p>';
@@ -603,10 +1043,14 @@ function renderCover(){
   h+='<section class="blk"><h3>參賽類別(請勾選)</h3><div class="cats">';
   CATS.forEach(function(c,i){h+='<label class="cat"><input type="checkbox" id="cat'+i+'" data-k="cat'+i+'" data-b="1"><span>【'+c+'】</span></label>'});
   h+='<label class="cat"><input type="checkbox" id="cat_o" data-k="cat_o" data-b="1"><span>其他</span><input type="text" id="cat_other" data-k="cat_other" aria-label="其他類別" placeholder="請填寫"></label></div></section>';
+  h+='<section class="blk"><h3>怎麼用這份表單</h3><div class="verbs">'+TEACH.STEPS.map(function(t,i){return '<span class="pill" style="background:var(--c'+(i+1)+')">'+esc(t.verb)+'</span>'}).join('<span aria-hidden="true">→</span>')+'</div>'+
+    '<ul class="howto"><li><b>漏斗邏輯:</b>發散蒐集情報 → 收斂成策略與目標 → 聚焦到目標顧客 → 展開成具體戰術 → 濃縮成一頁提案。前一張表的產出,就是後一張表的輸入。</li>'+
+    '<li><b>欄位旁的 <span class="hbtn" style="margin:0" aria-hidden="true">?</span>:</b>點開會在側邊顯示怎麼填、引導問題、常見錯誤,以及這格承接自哪裡、輸出到哪裡。想看示範時,可展開「看 IKEA 範例」。</li>'+
+    '<li><b>寫任何一格之前,</b>先問「這格的依據在前面哪一格?」;寫完之後再問「這格會被後面哪一格用到?」</li></ul></section>';
   h+='<section class="blk"><h3>目錄</h3><div class="toc">';
-  STEPS.forEach(function(s){
+  STEPS.forEach(function(s,si){
     var p=progress(s);
-    h+='<button type="button" data-go="'+s.id+'"><span class="n">'+s.n+'</span><span class="t">'+esc(s.t)+'</span><span class="pg"><i style="width:'+Math.round(p.n/p.total*100)+'%"></i></span><span class="c">已填 '+p.n+' / '+p.total+' 欄</span></button>';
+    h+='<button type="button" data-go="'+s.id+'"><span class="n">'+s.n+'・'+esc(TEACH.STEPS[si].verb)+'</span><span class="t">'+esc(s.t)+'</span><span class="c" style="margin-top:-2px">'+esc(TEACH.STEPS[si].q)+'</span><span class="pg"><i style="width:'+Math.round(p.n/p.total*100)+'%"></i></span><span class="c">已填 '+p.n+' / '+p.total+' 欄</span></button>';
   });
   h+='</div></section><section class="blk"><h3>填寫紀錄</h3><div id="whoBox"></div></section>';
   return h;
@@ -626,18 +1070,20 @@ function renderPage(id,noScroll){
   cur=id;var st=STEPS.filter(function(s){return s.id===id})[0],h;
   if(id==='cover'||!st)h=renderCover();
   else{
-    h='<div class="kicker">'+st.n+'</div><h1>'+esc(st.t)+'</h1><p class="use">'+esc(st.use)+'</p>';
+    h='<div class="kicker">'+st.n+'</div><h1>'+esc(st.t)+'</h1><p class="use">'+esc(st.use)+'</p>'+stepIntro(+id.replace('step',''));
     if(st.swot)h+=renderSwot();
     if(st.secs)h+=renderSecs(st.secs);
     if(st.stp)h+=renderStp();
     if(st.p7)h+=renderP7();
     if(st.one)h+=renderOne();
+    h+=stepCheck(+id.replace('step',''));
   }
   var o=order(),i=o.indexOf(id);
   h+='<div class="pager"><button class="btn" type="button" '+(i>0?'data-go="'+o[i-1]+'"':'disabled')+'>← 上一步</button><button class="btn pri" type="button" '+(i<o.length-1?'data-go="'+o[i+1]+'"':'disabled')+'>下一步 →</button></div>';
   if(!CANW)h='<p class="banner">你目前只能檢視,不能編輯。請請擁有者把你設為「可編輯」。</p>'+h;
   $('#main').innerHTML=h;
   bind();
+  updateChecks();
   fillWho();
   renderRail();
   if(!noScroll)window.scrollTo(0,0);
@@ -693,14 +1139,19 @@ document.addEventListener('input',function(e){
   if(el.tagName==='TEXTAREA')autosize(el);
   if(k.indexOf('ax_')===0)drawMap();
   if(/^ai\d_bud$/.test(k))sum();
+  if(/^ck\d_\d$/.test(k))updateChecks();
 });
 document.addEventListener('keydown',function(e){
   if(e.key==='Enter'&&e.target.id==='nickIn'){e.preventDefault();saveNick(e.target.value).then(function(ok){if(ok)renderWhoami()})}
   if(e.key==='Escape'&&e.target.id==='nickIn')renderWhoami();
+  else if(e.key==='Escape'&&!$('#drawer').hidden)closeHelp();
 });
 document.addEventListener('submit',function(e){if(e.target.id==='gform'){e.preventDefault();submitGate()}});
 document.addEventListener('click',function(e){
+  var jl=e.target.closest('[data-jump]');if(jl){jumpNode(jl.dataset.jump);return}
   var t=e.target.closest('button');if(!t)return;
+  if(t.dataset.help){if(helpId===t.dataset.help)closeHelp();else openHelp(t.dataset.help);return}
+  if(t.id==='dClose'){closeHelp();return}
   if(t.dataset.go){renderPage(t.dataset.go);return}
   if(t.dataset.del){pts().splice(+t.dataset.del,1);drawMap();setField('pts',pts());return}
   switch(t.id){
