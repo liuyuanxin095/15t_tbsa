@@ -194,9 +194,10 @@ table.w td.num,table.w th.num{text-align:right;font-variant-numeric:tabular-nums
 }
 @media (prefers-reduced-motion:no-preference){.tab,.btn,.toc button{transition:border-color .15s,background .15s}}
 </style>
-
 </head>
 <body>
+
+
 <div class="wrap">
   <header class="bar">
     <div class="brand"><b>TBSA 企劃表單</b><span>第 15 屆全國大專創新企劃競賽</span></div>
@@ -210,8 +211,8 @@ table.w td.num,table.w th.num{text-align:right;font-variant-numeric:tabular-nums
     </div>
   </header>
   <div id="panel" class="panel" hidden>
-    <div class="lb">備份 / 還原<small>資料只存在這個瀏覽器。換裝置或清除瀏覽資料前,請先複製備份代碼存起來。</small></div>
-    <textarea id="dataBox" aria-label="備份代碼" placeholder="複製備份後代碼會出現在這裡。要還原時,把代碼貼在這裡再按「還原」。"></textarea>
+    <div class="lb">備份 / 還原<small>資料只存在這個瀏覽器。換裝置或清除瀏覽資料前，請先複製備份代碼存起來。</small></div>
+    <textarea id="dataBox" aria-label="備份代碼" placeholder="複製備份後代碼會出現在這裡。要還原時，把代碼貼在這裡再按「還原」。"></textarea>
     <div class="row">
       <button class="btn" id="bBackup" type="button">複製備份代碼</button>
       <button class="btn pri" id="bRestore" type="button">還原貼上的代碼</button>
@@ -222,14 +223,14 @@ table.w td.num,table.w th.num{text-align:right;font-variant-numeric:tabular-nums
     <nav class="rail" id="rail" aria-label="表單步驟"></nav>
     <main id="main" class="sheet"></main>
   </div>
-  <p class="foot">本企劃表單為 WBSA 商務策劃師聯合會台灣辦事處所授權,僅提供「TBSA 商務企劃能力檢定」企劃學習之使用,非經授權勿用於他處。</p>
+  <p class="foot">本企劃表單為 WBSA 商務策劃師聯合會台灣辦事處所授權，僅提供「TBSA 商務企劃能力檢定」企劃學習之使用，非經授權勿用於他處。</p>
 </div>
 <div class="toast" id="toast" hidden></div>
 <aside class="drawer" id="drawer" hidden aria-label="填寫說明"><div class="dtop"><span class="dmute" style="font-size:12px">填寫說明</span><button class="btn sm" id="dClose" type="button">關閉</button></div><div id="dBody"></div></aside>
 <div class="gate" id="gate" hidden>
   <form class="gcard" id="gform" autocomplete="off">
     <h2 id="gtitle">登入</h2>
-    <p id="gtext">請輸入你的學號。學號只用來確認你是組員,不會顯示給其他人。</p>
+    <p id="gtext">請輸入你的學號。學號只用來確認你是組員，不會顯示給其他人。</p>
     <input type="text" id="gid" aria-label="學號" autocomplete="off" autocapitalize="off">
     <div class="gerr" id="gerr" aria-live="polite"></div>
     <button class="btn pri" id="gbtn" type="submit">登入</button>
@@ -243,31 +244,31 @@ const STEPS = [
   {n:1, key:'f1', name:'企劃情報／概念分析表', short:'企劃情報', color:'#2F6FDE', verb:'看清楚', q:'為什麼要做？外部發生什麼、我們手上有什麼？',
    usage:'將企劃目的，透過內外情報分析，確立企劃案的核心概念與企劃構想。',
    role:'整份企劃的「原料庫」。後面每一張表的判斷，都必須能回頭在這裡找到情報依據。',
-   tip:'<b>教學提醒：</b>情報要寫「事實＋意涵」，例如「單人戶增加（事實）→ 小坪數、可移動家具需求上升（意涵）」。只寫事實，下一張 SWOT 就接不上。',
+   tip:'',
    checks:['企劃目的寫成「要解決什麼問題」，而不是「要辦什麼活動」','PEST 四面向各至少 1 條，且每條都附上「對本案的意涵」','競爭情報有點名具體的替代方案（含非同業）','消費者情報寫到痛點或待完成任務，而非只有人口特徵','內部資源同時列出「有的」與「缺的」']},
   {n:2, key:'f2', name:'現況分析與策略目標設定表', short:'現況與目標', color:'#0E8F80', verb:'想清楚', q:'我們的處境如何？要往哪裡走、做到多少？',
    usage:'將企劃構想／概念，轉化企劃案願景描述，透過 SWOT 現況分析，導引策略議題與企劃方針，指導進行目標設定、障礙分析、策略形成。',
    role:'把情報「收斂」成策略方向與可衡量目標，是整份企劃的轉折點：上承情報，下啟 STP 與戰術。',
-   tip:'<b>教學提醒：</b>S/W 只能放「內部、可控」的因素；O/T 只能放「外部、不可控」的因素。交叉策略（SO/WO/ST/WT）必須是「動詞開頭的行動」，不能只是把兩格文字合併。',
+   tip:'',
    checks:['S/W 皆來自表 1 的內部資源盤點','O/T 皆可在表 1 的外部／產業／競爭情報找到依據','四個交叉策略都是可執行的行動句','策略目標是方向性陳述；成果目標有數字與期限','每個關鍵障礙都有對應的對策辦法']},
   {n:3, key:'f3', name:'STP 市場策略設計表', short:'STP 市場策略', color:'#C97A00', verb:'選對人', q:'要賣給誰？在他心中我們是什麼？',
    usage:'以區隔變數切分市場、選定目標市場，並以知覺圖與定位聲明確立差異化位置。',
    role:'把策略方向「落到顧客」：決定誰是主角、我們用什麼位置贏，後續 7Ps 與 AIDAS 都以此為準繩。',
-   tip:'<b>教學提醒：</b>區隔變數建議先用「顧客任務 Jobs-to-be-done」切，再用人口統計描述輪廓，避免只用年齡、收入切出看不出需求差異的區隔。',
+   tip:'',
    checks:['至少比較 2–3 個區隔，且區隔之間需求真的不同','說明選擇目標市場的理由（規模、可及性、與優勢的契合）','知覺圖兩軸是顧客在乎的屬性，且競爭者來自表 1','定位聲明包含：對象、需求、品類、利益、差異點']},
   {n:4, key:'f4', name:'行銷戰術及溝通活動設計表', short:'戰術與溝通', color:'#C93F66', verb:'做對事', q:'具體怎麼做？顧客從看到到滿意，每一步做什麼？',
    usage:'以 7Ps 設計行銷組合，並沿著顧客心理程序（AIDAS）規劃溝通活動、成果目標與預算。',
    role:'把定位「翻譯」成可執行戰術，並把表 2 的成果目標拆成各階段 KPI 與預算。',
-   tip:'<b>教學提醒：</b>檢查一致性——7Ps 的每一格都應該能說出「這怎麼支持我們的定位聲明？」；AIDAS 各階段 KPI 加總要能推到表 2 的成果目標。',
+   tip:'',
    checks:['7Ps 每一格都對應定位聲明中的承諾','對策辦法（表 2）已轉成具體戰術','AIDAS 五階段都有活動、KPI、預算','最後階段（Action/Satisfaction）的 KPI 與表 2 成果目標一致','預算有加總，可直接帶入一頁企劃書']},
   {n:5, key:'f5', name:'一頁企劃書', short:'一頁企劃書', color:'#6D51C9', verb:'說清楚', q:'用一頁讓決策者看懂：為何、做什麼、怎麼做、誰做、多少錢？',
    usage:'將前四張表的關鍵結論濃縮為 5W2H 式的一頁提案，供主管或客戶決策。',
    role:'整份企劃的「出口」。這裡不產生新資訊，每一格都是前四張表的濃縮與彙整。',
-   tip:'<b>教學提醒：</b>批改時可以反過來查：一頁企劃書的每一句話，能否指出它來自前面哪一張表的哪一格？找不到來源的句子，通常就是「憑空出現」的想法。',
+   tip:'',
    checks:['企劃案名稱與表 1 核心概念一致','目的／目標＝表 1 企劃目的＋表 2 策略／成果目標','內容要點寫出 What（方案）與 Whom（表 3 目標市場）','實施方式含時程、地點與主要戰術','所需經費與表 4 預算加總一致']}
 ];
 
-/* node: 用於關聯圖的「欄位節點」 */
+/* node： 用於關聯圖的「欄位節點」 */
 const NODES = {
   'f1.title':{s:1,t:'標題／副標題'}, 'f1.purpose':{s:1,t:'企劃目的'}, 'f1.pest':{s:1,t:'外部大環境（PEST）'},
   'f1.industry':{s:1,t:'產業情報'}, 'f1.comp':{s:1,t:'競爭情報'}, 'f1.consumer':{s:1,t:'消費者情報'}, 'f1.internal':{s:1,t:'內部情報／資源盤點'},
@@ -338,7 +339,7 @@ const THREADS = [
    say:'「花多少」由目標市場決定溝通活動，每個活動編列預算，加總成為所需經費。'}
 ];
 
-/* 欄位（表單格）——guide: 說明；ask: 引導問題；pit: 常見錯誤；ex: IKEA 範例 */
+/* 欄位（表單格）——guide： 說明；ask： 引導問題；pit： 常見錯誤；ex: IKEA 範例 */
 const F = {
 /* ---------- 表 1 ---------- */
 'f1.title':{node:'f1.title',label:'標題／副標題',hint:'一句話說出企劃的核心概念',
@@ -442,7 +443,7 @@ const F = {
   guide:'把策略目標拆成有數字、有期限的指標（SMART）。之後會在表 4 拆成各階段 KPI。',
   ask:['怎麼知道策略目標達成了？','試行期多長？用什麼指標判斷要不要擴大？'],
   pit:'沒有期限或基準值；或指標無法由本企劃影響。',
-  ex:'<p><b>試行 12 個月</b>（以下為教學假設值）：</p><ul><li>訂閱戶 3,000 戶</li><li>續租率 ≥ 60%</li><li>單件家具平均出租 ≥ 2 輪</li><li>NPS ≥ 40</li></ul>'},
+  ex:'<p><b>試行 12 個月</b>（以下為假設值）：</p><ul><li>訂閱戶 3,000 戶</li><li>續租率 ≥ 60%</li><li>單件家具平均出租 ≥ 2 輪</li><li>NPS ≥ 40</li></ul>'},
 'f2.barrier':{node:'f2.barrier',label:'關鍵障礙',hint:'達成成果目標最大的阻礙',
   guide:'針對成果目標，找出最可能阻礙達成的 2–3 個關鍵問題。',
   ask:['如果 12 個月後沒達標，最可能的原因是什麼？'],
@@ -545,8 +546,12 @@ const MAP_PTS = [
 
 return {STEPS:STEPS,NODES:NODES,LINKS:LINKS,F:F,MAP_PTS:MAP_PTS};
 })();
+var NOTES={"f1.title": {"g": "主標寫核心概念，副標補「對象+方案」。表 5 的企劃案名稱會沿用這裡。", "a": ["15 個字內說得完嗎?", "副標有寫到「誰」和「做什麼」嗎?"], "p": "只寫產品名或活動名，看不出價值。"}, "f1.purpose": {"g": "寫要解決的問題和想帶來的改變，顧客面、公司面都要有。表 2 會轉成策略目標。", "a": ["顧客現在卡在哪?", "為什麼現在要做?", "做完之後什麼不一樣?"], "p": "把手段當目的(例如「辦快閃活動」)。"}, "f1.pol": {"g": "列出會影響本案的政策與法規，每條後面接「對我們的意涵」。", "a": ["有哪些政策鼓勵或限制這類做法?", "契約、消保、環保有什麼要求?"], "p": "只列法規名稱，沒寫是加分還是限制。"}, "f1.eco": {"g": "寫影響購買力與消費方式的趨勢，要連到目標族群的實際行為。", "a": ["目標族群的可支配所得與支出結構?", "「使用權取代所有權」的接受度?"], "p": "引了總體數字，但沒連到目標族群。"}, "f1.soc": {"g": "寫人口結構與生活型態的變化，以及帶來的需求轉變。", "a": ["家庭與居住型態有什麼變化?", "價值觀(永續、極簡)有什麼轉變?"], "p": "只寫少子化、高齡化這類通用趨勢，和本案沒關係。"}, "f1.tech": {"g": "找出能讓方案做得到、做得好的技術條件。", "a": ["哪些技術能降低成本或改善體驗?", "顧客習慣用什麼數位管道做決定?"], "p": "列熱門技術，卻說不出在本案的用途。"}, "f1.industry": {"g": "寫產業的成長性、結構變化和標竿案例，作為 O/T 的依據。", "a": ["產業往哪個方向走?", "國內外有沒有先例?成敗原因?"], "p": "只抄產值，沒說明和本案的關係。"}, "f1.comp": {"g": "除了同業，也列顧客會拿來比較的替代方案。這些會放到表 3 的知覺圖。", "a": ["顧客不選我們時，會改用什麼?", "各競爭者的強弱項?"], "p": "只列同業品牌，漏掉「什麼都不做」這類替代方案。"}, "f1.consumer": {"g": "寫顧客的需求、痛點、決策過程和想完成的任務(JTBD)。表 3 的區隔變數從這裡來。", "a": ["顧客在什麼情境下需要?", "現在怎麼解決?哪裡不滿意?", "真正想完成的任務是什麼?"], "p": "只寫人口特徵，沒寫需求與痛點。"}, "f1.internal": {"g": "盤點品牌、產品、通路、人才、資料、財務，有的和缺的都寫。表 2 再分成 S 和 W。", "a": ["哪些資源競爭者很難模仿?", "要執行本案，目前還缺什麼能力?"], "p": "只寫優點;或把外部趨勢寫成內部資源。"}, "f2.S": {"g": "從表 1 的內部資源挑出「相對競爭者較強」且和本案有關的因素。", "a": ["這個優勢是相對誰說的?", "顧客在乎嗎?"], "p": "把外部機會寫進 S(租屋人口多是 O，不是 S)。"}, "f2.W": {"g": "從表 1 挑出執行本案時的能力缺口。", "a": ["競爭者會從哪裡攻擊我們?"], "p": "寫得太空泛(例如「資源不足」)，導不出對策。"}, "f2.O": {"g": "來自表 1 外部、產業、競爭、消費者情報中，對本案有利的趨勢。", "a": ["這是趨勢，還是一次性事件?"], "p": "把自己的計畫寫成機會(「我們可以推 App」不是 O)。"}, "f2.T": {"g": "來自表 1 外部情報中，對本案不利的趨勢或競爭壓力。", "a": ["最可能讓本案失敗的外部因素是什麼?"], "p": "只寫「競爭激烈」，沒點出是誰、怎麼威脅。"}, "f2.SO": {"g": "用優勢抓機會，通常是主攻策略。寫成動詞開頭的行動。", "a": ["哪個優勢最能放大哪個機會?"], "p": "只是把 S 和 O 的文字合併，沒有行動。"}, "f2.WO": {"g": "借外部機會補內部劣勢。", "a": ["有哪些夥伴或趨勢能補我們的不足?"], "p": "寫成「加強劣勢」這種空話。"}, "f2.ST": {"g": "用優勢降低威脅的衝擊。", "a": ["我們有什麼是威脅來源做不到的?"], "p": "忽略威脅，只談機會。"}, "f2.WT": {"g": "劣勢和威脅交會的最大風險，寫防守或退出方案。", "a": ["最壞的情況是什麼?怎麼避免?"], "p": "空白，或只寫「放棄」。"}, "f2.goal": {"g": "從交叉策略收斂出 1–2 個主要方向，呼應表 1 的企劃目的。", "a": ["所有交叉策略共同指向哪個方向?"], "p": "策略目標寫成數字(那是成果目標)。"}, "f2.outcome": {"g": "把策略目標拆成有數字、有期限的指標。表 4 會再拆成各階段 KPI。", "a": ["怎麼知道策略目標達成了?", "試行期多長?用什麼指標決定要不要擴大?"], "p": "沒有期限或基準值;或指標不是本企劃能影響的。"}, "f2.barrier": {"g": "針對成果目標，列出最可能卡住的 2–3 個關鍵問題。", "a": ["期限到了沒達標，最可能的原因是什麼?"], "p": "障礙和成果目標無關，或列太多、不聚焦。"}, "f2.counter": {"g": "每個障礙對應一個對策，表 4 會把對策變成具體戰術。", "a": ["這個對策真的能移除障礙嗎?成本多少?"], "p": "障礙和對策沒有一一對應。"}, "f3.name": {"g": "本次 STP 針對的商品或服務名稱，要和表 1 的標題一致。", "a": ["名稱傳達得出核心價值嗎?"], "p": "和表 1 標題不一致。"}, "f3.jtbd": {"g": "用顧客想完成的任務切區隔，比只用人口變數更看得出需求差異。來源是表 1 的消費者情報。", "a": ["他們在什麼情境下需要我們?", "怎樣算任務完成?"], "p": "三個區隔的任務其實一樣，只是年齡不同。"}, "f3.demo": {"g": "用年齡、所得、居住型態描述各區隔輪廓，方便估規模與選媒體。", "a": ["這個區隔大約多大?接觸得到嗎?"], "p": "只有人口變數，沒有需求差異。"}, "f3.target": {"g": "選出主要(和次要)目標市場，並寫理由：規模、需求強度、可及性、和表 2 優勢的契合度。", "a": ["為什麼是這群人，不是另一群?", "SO 策略最適合打哪一群?"], "p": "「全部都要」，或沒寫選擇理由。"}, "f3.feature": {"g": "針對目標市場的任務，列出關鍵功能和特色。", "a": ["每個特色各解決顧客的哪個痛點?"], "p": "列出所有功能，沒聚焦在目標市場在乎的。"}, "f3.map": {"g": "選兩個目標顧客最在乎的屬性當軸，把我們和表 1 的競爭者放上去，找「有需求但沒人站」的位置。", "a": ["這兩軸是顧客在乎的，還是我們自己在乎的?", "我們的位置有沒有和競爭者重疊?"], "p": "兩軸高度相關(如價格與品質)，點排成一直線。"}, "f3.statement": {"g": "一句話整合：目標市場、需求、品類、核心利益、差異點。表 4 所有戰術都以它為準。", "a": ["別人聽完能說出「為什麼選你不選別人」嗎?"], "p": "寫成廣告標語;或差異點競爭者也能說。"}, "f4.product": {"g": "產品組合、品質、規格、服務內容，要兌現定位裡的核心利益。", "a": ["哪一點最能兌現定位聲明?"], "p": "和表 3 的功能特色不一致。"}, "f4.price": {"g": "定價方式、付款條件、折扣與心理定價。", "a": ["價格支持我們的定位嗎?"], "p": "只寫數字，沒寫定價邏輯。"}, "f4.place": {"g": "顧客在哪裡接觸、購買、取得服務。", "a": ["目標顧客平常在哪找資訊?"], "p": "只寫「線上+線下」，沒有具體通路。"}, "f4.promotion": {"g": "廣告、公關、社群、促銷的整體方向。細部活動寫在下面的 AIDAS。", "a": ["核心訊息是什麼?"], "p": "和 AIDAS 重複或矛盾。"}, "f4.people": {"g": "第一線人員的角色、能力與訓練。", "a": ["哪個接觸點最容易讓顧客失望?"], "p": "服務類企劃最容易漏掉這欄。"}, "f4.physical": {"g": "讓無形服務「看得見」的線索：環境、物件、文件。", "a": ["顧客憑什麼相信品質?"], "p": "只寫「店面裝潢」。"}, "f4.process": {"g": "顧客從申請到結束的完整流程與關鍵步驟。", "a": ["哪一步最容易卡住?"], "p": "只寫公司內部作業，沒從顧客角度寫。"}, "f4.kpi": {"g": "每個階段的 KPI。最後階段的 KPI 要和表 2 的成果目標一致。", "a": ["各階段 KPI 能推到最終成果目標嗎?"], "p": "只有曝光數，沒有轉換與滿意指標。"}, "f4.budget": {"g": "每個活動的預算，加總後帶入表 5 的所需經費。", "a": ["預算分配符合各階段的重要性嗎?"], "p": "沒加總，或和表 5 對不上。"}, "f4.A": {"g": "讓目標市場知道有這件事。", "a": ["目標顧客常出現在哪些媒體?"], "p": ""}, "f4.I": {"g": "讓顧客想進一步了解。", "a": ["什麼內容會讓他停下來看?"], "p": ""}, "f4.D": {"g": "讓顧客覺得「我想要」。", "a": ["什麼證據能讓他相信?"], "p": ""}, "f4.Ac": {"g": "降低行動門檻，促成訂閱或購買。", "a": ["顧客最後猶豫的是什麼?"], "p": ""}, "f4.Sa": {"g": "讓顧客滿意、續用並推薦。", "a": ["什麼會讓他續用或推薦朋友?"], "p": ""}, "f5.name": {"g": "沿用表 1 的核心概念，一眼看懂。", "a": ["名稱有「對象+方案」嗎?"], "p": "和表 1 標題不一致。"}, "f5.why": {"g": "濃縮表 1 企劃目的 + 表 2 策略/成果目標。", "a": ["30 秒內看得懂要達成什麼嗎?"], "p": "和表 2 的數字不一致。"}, "f5.benefit": {"g": "由表 2 成果目標與表 4 KPI 推估質化與量化效益。", "a": ["效益能被衡量嗎?"], "p": "只寫「提升品牌形象」這種無法驗證的效益。"}, "f5.what": {"g": "寫方案內容(What)、對象(Whom，來自表 3 目標市場)和核心價值主張。", "a": ["對象與方案和表 3 一致嗎?"], "p": "Whom 寫成「所有消費者」。"}, "f5.how": {"g": "彙整表 4 的 7Ps 與 AIDAS，依時程寫地點與作法;表 2 的對策也放進來當風險控管。", "a": ["時程合理嗎?有關鍵里程碑與決策點嗎?"], "p": "只有活動清單，沒有時程與地點。"}, "f5.who": {"g": "依表 1 內部資源與表 4 People 規劃團隊與分工。", "a": ["每項工作都有負責人嗎?外部夥伴是誰?"], "p": "只寫「行銷部」。"}, "f5.cost": {"g": "表 4 的行銷溝通預算，加上建置、營運等費用。", "a": ["行銷預算和表 4 加總一致嗎?"], "p": "只列行銷費用，漏掉系統、物流等建置成本。"}};
+var TIPS=["<b>備忘：</b>情報寫「事實 + 意涵」，例如「單人戶增加 → 小坪數、可移動家具需求上升」。只有事實的話，SWOT 會接不上。", "<b>備忘：</b>S/W 只放內部、我們能控制的;O/T 只放外部、不能控制的。交叉策略(SO/WO/ST/WT)寫成動詞開頭的行動，不要只是把兩格文字合併。", "<b>備忘：</b>區隔先用「顧客任務」切，再用人口統計描述輪廓。只用年齡、收入切，常常看不出需求差異。", "<b>備忘：</b>7Ps 每一格都要能說明「這怎麼支持我們的定位聲明」;AIDAS 各階段 KPI 加起來要能推到表 2 的成果目標。", "<b>備忘：</b>一頁企劃書的每一句，都要能指出來自前面哪一張表的哪一格。找不到來源的句子，多半是臨時冒出來的想法，先回頭補。"];
+Object.keys(NOTES).forEach(function(k){var f=TEACH.F[k];if(!f)return;f.guide=NOTES[k].g;f.ask=NOTES[k].a;f.pit=NOTES[k].p});
+TEACH.STEPS.forEach(function(t,i){t.tip=TIPS[i]});
 (function(){
-var SHEET_URL='https://script.google.com/macros/s/AKfycbzaS_naudhlfp07W-BzUyaMbsDMr2aDx5sxNR09aQ0imG4ZGpZMFz0nc1T5bekYGAJB/exec'; // 部署 Apps Script 後,把網址貼在引號內,全組就自動同步並用學號登入
+var SHEET_URL='https://script.google.com/macros/s/AKfycbzaS_naudhlfp07W-BzUyaMbsDMr2aDx5sxNR09aQ0imG4ZGpZMFz0nc1T5bekYGAJB/exec'; // 部署 Apps Script 後，把網址貼在引號內，全組就自動同步並用學號登入
 var KEY='tbsa15-form-v1';
 var $=function(s,r){return (r||document).querySelector(s)};
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
@@ -561,7 +566,7 @@ function save(){
   clearTimeout(saveT);
   saveT=setTimeout(function(){
     try{persist();if(!DB)$('#saved').textContent='已自動儲存'}
-    catch(e){if(!DB)$('#saved').textContent='無法儲存,請用備份'}
+    catch(e){if(!DB)$('#saved').textContent='無法儲存，請用備份'}
     renderRail();fillWho();
   },350);
 }
@@ -611,7 +616,7 @@ function setField(k,v,delay){
   S[k]=v;
   {
     A[k]={by:CUR,at:Date.now()};
-    if(!CUR&&!warned){warned=true;toast('請先按上方「設定暱稱」,這一欄才會記錄是誰填的')}
+    if(!CUR&&!warned){warned=true;toast('請先按上方「設定暱稱」，這一欄才會記錄是誰填的')}
     var el0=document.querySelector('[data-by="'+k+'"]');if(el0)el0.textContent=(v===''||v===false)?'':byText(k);
   }
   if(DB){dirty[k]=1;
@@ -625,7 +630,7 @@ function flush(k){
   delete dirty[k];writing[k]=1;
   var a=A[k]||{by:ME.id,at:Date.now()};
   coll.doc(k).set({v:S[k]===undefined?'':S[k],by:a.by,at:a.at,l:labelOf(k),t:fmtFull(a.at)}).then(function(){done(k)},function(e){
-    done(k);toast(e&&e.code==='invalid_argument'?'你目前沒有編輯權限,內容沒有同步':'同步失敗,稍後會再試');
+    done(k);toast(e&&e.code==='invalid_argument'?'你目前沒有編輯權限，內容沒有同步':'同步失敗，稍後會再試');
   });
 }
 function done(k){
@@ -666,8 +671,8 @@ function contributors(){
 function fillWho(){
   var box=$('#whoBox');if(!box)return;
   var by=contributors(),ids=Object.keys(by).sort(function(a,b){return by[b].n-by[a].n});
-  var note=DB?'':'<p class="who-note">目前資料只存在這個瀏覽器(隊友看不到你的紀錄)。原因:'+esc(WHY)+'</p>';
-  if(!ids.length){box.innerHTML='<p class="who-note">還沒有填寫紀錄。先在上方選好「填寫人」,再填表格,每一欄下方就會顯示是誰填的。</p>'+note;return}
+  var note=DB?'':'<p class="who-note">目前資料只存在這個瀏覽器(隊友看不到你的紀錄)。原因：'+esc(WHY)+'</p>';
+  if(!ids.length){box.innerHTML='<p class="who-note">還沒有填寫紀錄。先在上方選好「填寫人」，再填表格，每一欄下方就會顯示是誰填的。</p>'+note;return}
   var h='<p class="who-note">以每一欄最後一次編輯的人計算。</p><div class="scroll"><table class="w"><thead><tr><th>填寫者</th><th class="num">欄位數</th><th>負責的部分</th><th>最近編輯</th></tr></thead><tbody>';
   ids.forEach(function(id){
     var r=by[id];
@@ -729,13 +734,13 @@ function sheetSend(){
   var items=sPend,w=sWait;sPend=[];sWait=[];
   sheetPost({id:SID,items:items}).then(function(j){
     if(j&&j.ok)w.forEach(function(x){x[0]()});
-    else{if(j&&j.error==='noid')needLogin('學號已失效,請重新登入。');w.forEach(function(x){x[1]({code:'fail'})})}
+    else{if(j&&j.error==='noid')needLogin('學號已失效，請重新登入。');w.forEach(function(x){x[1]({code:'fail'})})}
   },function(){w.forEach(function(x){x[1]({code:'fail'})})});
 }
 function sheetPull(){
   if(!SID||document.hidden)return;
   sheetGet('id='+encodeURIComponent(SID)).then(function(j){
-    if(j&&j.error){if(j.error==='noid')needLogin('學號已失效,請重新登入。');else $('#saved').textContent='同步失敗';return}
+    if(j&&j.error){if(j.error==='noid')needLogin('學號已失效，請重新登入。');else $('#saved').textContent='同步失敗';return}
     var data=(j&&j.data)||{},ids=Object.keys(data),ch=[];
     NICK=j.roster||NICK;
     if(j.me){MYNICK=j.me.nick||'';CUR=j.me.code;if(!$('#nickIn'))renderWhoami()}
@@ -743,20 +748,20 @@ function sheetPull(){
     sPrev=data;
     if(!Object.keys(dirty).length&&!Object.keys(writing).length)$('#saved').textContent='已同步';
     onSnap({docs:ids.map(function(k){return {id:k,exists:true,data:function(){return data[k]}}}),empty:!ids.length,docChanges:function(){return ch}});
-  },function(){$('#saved').textContent='同步失敗,稍後重試'});
+  },function(){$('#saved').textContent='同步失敗，稍後重試'});
 }
 function sheetRename(n){
   return sheetPost({id:SID,action:'rename',nick:n}).then(function(j){
     if(j&&j.ok){MYNICK=n;NICK[CUR]=n;renderWhoami();refreshBy();fillWho();toast('已更新暱稱');return true}
-    toast(j&&j.error==='noid'?'學號已失效,請重新登入':'暱稱沒有儲存成功');return false;
-  },function(){toast('連線失敗,暱稱沒有儲存');return false});
+    toast(j&&j.error==='noid'?'學號已失效，請重新登入':'暱稱沒有儲存成功');return false;
+  },function(){toast('連線失敗，暱稱沒有儲存');return false});
 }
 /* --- login gate --- */
 var gateMode='id';
 function showGate(mode,msg){
   gateMode=mode||'id';
   $('#gtitle').textContent=gateMode==='id'?'登入':'設定暱稱';
-  $('#gtext').textContent=gateMode==='id'?'請輸入你的學號。學號只用來確認你是組員,不會顯示給其他人。':'第一次登入,請設定一個暱稱。之後每一欄會顯示這個暱稱,隨時可以再改。';
+  $('#gtext').textContent=gateMode==='id'?'請輸入你的學號。學號只用來確認你是組員，不會顯示給其他人。':'第一次登入，請設定一個暱稱。之後每一欄會顯示這個暱稱，隨時可以再改。';
   $('#gid').value='';$('#gid').setAttribute('aria-label',gateMode==='id'?'學號':'暱稱');$('#gid').maxLength=gateMode==='id'?30:12;
   $('#gerr').textContent=msg||'';$('#gbtn').textContent=gateMode==='id'?'登入':'儲存暱稱';
   $('#gate').hidden=false;setTimeout(function(){$('#gid').focus()},50);
@@ -777,8 +782,8 @@ function submitGate(){
     sheetGet('action=login&id='+encodeURIComponent(v)).then(function(j){
       $('#gbtn').disabled=false;
       if(j&&j.ok){try{localStorage.setItem('tbsa15-sid',v)}catch(e){};loginOk({sid:v,code:j.code,nick:j.nick})}
-      else $('#gerr').textContent=j&&j.error==='noid'?'找不到這個學號。請確認輸入正確,或請管理者把你加到試算表的「組員名單」。':'登入失敗,請稍後再試';
-    },function(){$('#gbtn').disabled=false;$('#gerr').textContent='連線失敗,請檢查網路或網址設定'});
+      else $('#gerr').textContent=j&&j.error==='noid'?'找不到這個學號。請確認輸入正確，或請管理者把你加到試算表的「組員名單」。':'登入失敗，請稍後再試';
+    },function(){$('#gbtn').disabled=false;$('#gerr').textContent='連線失敗，請檢查網路或網址設定'});
   }else{
     saveNick(v).then(function(ok){$('#gbtn').disabled=false;if(ok){$('#gate').hidden=true;if(!polling)loginOk({code:CUR,nick:MYNICK});else sheetPull()}});
   }
@@ -791,8 +796,8 @@ function initSheet(cfg){
   $('#saved').textContent='請先登入';renderWhoami();
   if(SID){
     sheetGet('action=login&id='+encodeURIComponent(SID)).then(function(j){
-      if(j&&j.ok)loginOk({sid:SID,code:j.code,nick:j.nick});else showGate('id',j&&j.error==='noid'?'學號已失效,請重新登入。':'');
-    },function(){showGate('id','連線失敗,請檢查網路後重新整理')});
+      if(j&&j.ok)loginOk({sid:SID,code:j.code,nick:j.nick});else showGate('id',j&&j.error==='noid'?'學號已失效，請重新登入。':'');
+    },function(){showGate('id','連線失敗，請檢查網路後重新整理')});
   }else showGate('id');
 }
 function noShare(msg){
@@ -805,10 +810,10 @@ function initShared(){
     noShare('尚未設定 Google 試算表同步(管理者要在檔案開頭的 SHEET_URL 填入網址)。');return}
   Promise.all([window.claude.use('user'),window.claude.use('db')]).then(function(r){
     var u=r[0],d=r[1];
-    if(!u||!d){noShare('目前的開啟方式沒有提供共用資料功能。請在 Claude 網站或 App 內開啟這個 artifact,並重新整理頁面。');return}
+    if(!u||!d){noShare('目前的開啟方式沒有提供共用資料功能。請在 Claude 網站或 App 內開啟這個 artifact，並重新整理頁面。');return}
     window.USERNS=u;
     return u.me().then(function(me){
-      if(!me||!me.id){noShare('沒有登入 Claude,無法與隊友共用資料。');return}
+      if(!me||!me.id){noShare('沒有登入 Claude，無法與隊友共用資料。');return}
       ME=me;
       return Promise.all([u.can('data.write'),u.canEdit()]).then(function(c){
         CANW=c[0]!==false;CANADMIN=!!c[1];
@@ -819,7 +824,7 @@ function initShared(){
         if(cur==='cover')renderPage('cover',true);else applyRO();
       });
     });
-  }).catch(function(){noShare('連線共用資料時發生錯誤,請重新整理頁面。')});
+  }).catch(function(){noShare('連線共用資料時發生錯誤，請重新整理頁面。')});
 }
 function toast(m){var t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(function(){t.hidden=true},2400)}
 
@@ -827,25 +832,25 @@ function toast(m){var t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(
 var CATS=['聰明消費者','理財小幫手','健康守護神','工作超天才','生活好朋友'];
 function F(k,l,o){o=o||{};o.k=k;o.l=l;return o}
 var STEPS=[
- {id:'step1',n:'STEP 1',t:'企劃情報 / 概念分析表',use:'將企劃目的,透過內外情報分析,轉化企劃案的核心概念與企劃構想。',
+ {id:'step1',n:'STEP 1',t:'企劃情報 / 概念分析表',use:'將企劃目的，透過內外情報分析，轉化企劃案的核心概念與企劃構想。',
   secs:[
-   {cls:'g2',f:[F('title','標題 / 副標題',{rows:2,ph:'例:校園二手書循環平台|讓每本書多被讀三次'}),F('compete','競爭情報分析',{rows:2,ph:'現有替代方案、直接與間接競爭者'})]},
+   {cls:'g2',f:[F('title','標題 / 副標題',{rows:2,ph:'例：校園二手書循環平台|讓每本書多被讀三次'}),F('compete','競爭情報分析',{rows:2,ph:'現有替代方案、直接與間接競爭者'})]},
    {title:'企劃目的',cls:'g1',f:[F('purpose','為什麼要做這個企劃?想解決什麼問題?',{rows:3})]},
    {title:'外部大環境 / 時代趨勢情報分析',cls:'g2',f:[F('pol','政治 / 法律趨勢情報',{rows:3}),F('eco','經濟 / 消費趨勢情報',{rows:3}),F('soc','社會 / 人口趨勢情報',{rows:3}),F('tec','科技 / 技術趨勢情報',{rows:3})]},
    {cls:'g2',f:[F('cons','消費者情報分析',{rows:4,ph:'目標族群的行為、需求、痛點'}),F('ind','產業情報分析',{rows:4,ph:'市場規模、成長性、價值鏈'})]},
    {title:'內部情報 / 資源盤點',cls:'g1',f:[F('inner','團隊擁有的人力、技術、資金、通路與人脈',{rows:3})]}
   ]},
- {id:'step2',n:'STEP 2',t:'現況分析與策略目標設定表',use:'將企劃構想與概念轉化為企劃案願景描述,透過 SWOT 現況分析導引策略議題與企劃方針,進行目標設定、障礙分析與策略形成。',
+ {id:'step2',n:'STEP 2',t:'現況分析與策略目標設定表',use:'將企劃構想與概念轉化為企劃案願景描述，透過 SWOT 現況分析導引策略議題與企劃方針，進行目標設定、障礙分析與策略形成。',
   swot:true,
   secs:[
-   {cls:'g3',f:[F('goal_s','策略目標',{rows:4}),F('goal_r','成果目標',{rows:4,ph:'可衡量的結果,例:三個月內 500 位註冊用戶'}),F('goal_b','關鍵障礙',{rows:4})]},
-   {title:'對策辦法',cls:'g1',f:[F('plan','綜合思考能滿足的策略議題,並能解決關鍵問題的對策辦法',{rows:6,sub:'如:市場行銷對策、產品研發對策、生產製造對策、財務對策、人事對策等'})]}
+   {cls:'g3',f:[F('goal_s','策略目標',{rows:4}),F('goal_r','成果目標',{rows:4,ph:'可衡量的結果，例：三個月內 500 位註冊用戶'}),F('goal_b','關鍵障礙',{rows:4})]},
+   {title:'對策辦法',cls:'g1',f:[F('plan','綜合思考能滿足的策略議題，並能解決關鍵問題的對策辦法',{rows:6,sub:'如：市場行銷對策、產品研發對策、生產製造對策、財務對策、人事對策等'})]}
   ]},
- {id:'step3',n:'STEP 3',t:'STP 市場策略設計表',use:'依市場區隔(Segmentation)、目標市場(Targeting)、市場定位(Positioning)三步驟,決定要服務誰、用什麼角色被記住。',
+ {id:'step3',n:'STEP 3',t:'STP 市場策略設計表',use:'依市場區隔(Segmentation)、目標市場(Targeting)、市場定位(Positioning)三步驟，決定要服務誰、用什麼角色被記住。',
   stp:true},
- {id:'step4',n:'STEP 4',t:'行銷戰術及溝通活動設計表',use:'用 7Ps 設計行銷戰術,再依顧客心理程序(AIDAS)安排溝通活動、成果目標與預算。',
+ {id:'step4',n:'STEP 4',t:'行銷戰術及溝通活動設計表',use:'用 7Ps 設計行銷戰術，再依顧客心理程序(AIDAS)安排溝通活動、成果目標與預算。',
   p7:true},
- {id:'step5',n:'STEP 5',t:'一頁企劃書',use:'把前四步的結論收斂成一頁,方便評審快速理解。',
+ {id:'step5',n:'STEP 5',t:'一頁企劃書',use:'把前四步的結論收斂成一頁，方便評審快速理解。',
   one:true}
 ];
 var P7=[['prod','產品','Product'],['price','價格','Price'],['promo','宣傳促銷','Promotion'],['place','通路','Place'],['ppl','人員訓練','People'],['phys','有型展示','Physical Evidence'],['proc','服務流程','Process']];
@@ -897,14 +902,14 @@ function helpHTML(id){
   var node=f.node,s=TEACH.NODES[node].s;
   var h='<h3><span class="pill" style="background:var(--c'+s+')">表'+s+'</span> '+esc(f.label)+'</h3>';
   if(f.hint)h+='<p class="dmute" style="margin-top:4px">'+esc(f.hint)+'</p>';
-  h+='<h4>怎麼填</h4><p>'+esc(f.guide)+'</p>';
-  if(f.ask&&f.ask.length)h+='<h4>引導問題</h4><ul>'+f.ask.map(function(a){return '<li>'+esc(a)+'</li>'}).join('')+'</ul>';
-  if(f.pit)h+='<h4>常見錯誤</h4><div class="pit">'+esc(f.pit)+'</div>';
+  h+='<h4>重點</h4><p>'+esc(f.guide)+'</p>';
+  if(f.ask&&f.ask.length)h+='<h4>先想</h4><ul>'+f.ask.map(function(a){return '<li>'+esc(a)+'</li>'}).join('')+'</ul>';
+  if(f.pit)h+='<h4>注意</h4><div class="pit">'+esc(f.pit)+'</div>';
   var ex=f.ex,exh='';
   if(ex==='map')exh=mapSvg();
   else if(Array.isArray(ex)){var labs=(id==='f3.jtbd'||id==='f3.demo')?SEGLABELS:AIDLABELS;exh='<ul class="exl">'+ex.map(function(t,i){return '<li><b>'+esc(labs[i]||'')+'</b>'+esc(t)+'</li>'}).join('')+'</ul>'}
   else if(ex)exh=ex;
-  if(exh)h+='<details class="exd"><summary>看 IKEA 範例</summary><div class="exb">'+exh+'<p class="exn">教學用假想企劃,非 IKEA 官方計畫;名稱、價格、戶數、預算等數字皆為假設值,請換成你們自己蒐集的資料。</p></div></details>';
+  if(exh)h+='<details class="exd"><summary>參考：IKEA 範例</summary><div class="exb">'+exh+'<p class="exn">假想案例，不是 IKEA 官方計畫。名稱、價格、戶數、預算等數字都是假設值，只當寫法參考。</p></div></details>';
   var ins=TEACH.LINKS.filter(function(l){return l[1]===node}),outs=TEACH.LINKS.filter(function(l){return l[0]===node});
   function li(l,dir){var o=dir==='in'?l[0]:l[1],n=TEACH.NODES[o];return '<li data-jump="'+o+'"><b style="color:var(--c'+n.s+')">表'+n.s+'・'+esc(n.t)+'</b><small>'+esc(l[2])+'</small></li>'}
   h+='<h4>⬅ 承接自</h4>'+(ins.length?'<ul class="rel">'+ins.map(function(l){return li(l,'in')}).join('')+'</ul>':'<p class="dmute">外部蒐集 / 本表起點</p>');
@@ -942,13 +947,13 @@ function stepIntro(idx){
   var inc=TEACH.LINKS.filter(function(l){return N[l[1]].s===idx&&N[l[0]].s<idx}).map(function(l){return l[0]});
   var out=TEACH.LINKS.filter(function(l){return N[l[0]].s===idx&&N[l[1]].s>idx}).map(function(l){return l[1]});
   return '<div class="intro"><span class="pill" style="background:var(--c'+idx+')">STEP '+idx+'・'+esc(t.verb)+'</span>'+
-   '<p><b>核心問題:</b>'+esc(t.q)+'</p><p><b>在整份企劃中的角色:</b>'+esc(t.role)+'</p>'+
-   '<div class="rels"><span class="rl">⬅ 承接自</span>'+(inc.length?chips(inc):'<span class="dmute">本表是起點,情報來自外部蒐集與內部盤點</span>')+'</div>'+
-   '<div class="rels"><span class="rl">輸出到 ➡</span>'+(out.length?chips(out):'<span class="dmute">本表是終點,彙整前四表交給決策者</span>')+'</div></div>';
+   '<p><b>核心問題：</b>'+esc(t.q)+'</p><p><b>在整份企劃中的角色：</b>'+esc(t.role)+'</p>'+
+   '<div class="rels"><span class="rl">⬅ 承接自</span>'+(inc.length?chips(inc):'<span class="dmute">本表是起點，情報來自外部蒐集與內部盤點</span>')+'</div>'+
+   '<div class="rels"><span class="rl">輸出到 ➡</span>'+(out.length?chips(out):'<span class="dmute">本表是終點，彙整前四表交給決策者</span>')+'</div></div>';
 }
 function stepCheck(idx){
   var t=TEACH.STEPS[idx-1];
-  var h='<section class="blk"><h3>完成檢核<span id="cknum" class="ckn"></span></h3><div class="chk">';
+  var h='<section class="blk"><h3>完成前確認<span id="cknum" class="ckn"></span></h3><div class="chk">';
   t.checks.forEach(function(c,i){h+='<label class="cki"><input type="checkbox" id="ck'+idx+'_'+i+'" data-k="ck'+idx+'_'+i+'"><span>'+esc(c)+'</span></label>'});
   return h+'</div><div class="cprog"><i id="ckbar" style="background:var(--c'+idx+')"></i></div><div class="tipbox">'+t.tip+'</div></section>';
 }
@@ -989,7 +994,7 @@ function renderSwot(){
   return h+'</div></section>';
 }
 function renderStp(){
-  var h='<section class="blk"><div class="fld"><span class="lb"><label for="prodname">商品 / 服務名稱</label>'+hb('f3.name')+'</span><input type="text" id="prodname" data-k="prodname" placeholder="例:書循環"></div></section>';
+  var h='<section class="blk"><div class="fld"><span class="lb"><label for="prodname">商品 / 服務名稱</label>'+hb('f3.name')+'</span><input type="text" id="prodname" data-k="prodname" placeholder="例：書循環"></div></section>';
   h+='<section class="blk"><h3>市場區隔(Segmentation)</h3><div class="scroll"><table class="t"><thead><tr><th class="rh">區隔變數</th>';
   ['a','b','c'].forEach(function(c){h+='<th>市場區隔 '+c.toUpperCase()+'</th>'});
   h+='</tr></thead><tbody>';
@@ -1002,18 +1007,18 @@ function renderStp(){
   ['a','b','c'].forEach(function(c){h+='<td>'+ta('seg_'+c+'_x',3)+'</td>'});
   h+='</tr></tbody></table></div></section>';
   h+='<section class="blk"><div class="grid g2">'+
-    fld(F('target','目標市場(Targeting)',{rows:5,sub:'從上面選出要主攻的區隔,並說明理由'}))+
+    fld(F('target','目標市場(Targeting)',{rows:5,sub:'從上面選出要主攻的區隔，並說明理由'}))+
     fld(F('feat','產品或服務的功能 / 特色',{rows:5}))+'</div></section>';
   h+='<section class="blk"><h3>市場定位(Positioning)'+hb('f3.map')+'</h3>'+
     '<div class="axes">'+
-    '<label class="fld"><span class="lb">上方軸</span><input type="text" id="ax_t" data-k="ax_t" placeholder="例:價格高"></label>'+
-    '<label class="fld"><span class="lb">下方軸</span><input type="text" id="ax_b" data-k="ax_b" placeholder="例:價格低"></label>'+
-    '<label class="fld"><span class="lb">左方軸</span><input type="text" id="ax_l" data-k="ax_l" placeholder="例:傳統"></label>'+
-    '<label class="fld"><span class="lb">右方軸</span><input type="text" id="ax_r" data-k="ax_r" placeholder="例:創新"></label></div>'+
+    '<label class="fld"><span class="lb">上方軸</span><input type="text" id="ax_t" data-k="ax_t" placeholder="例：價格高"></label>'+
+    '<label class="fld"><span class="lb">下方軸</span><input type="text" id="ax_b" data-k="ax_b" placeholder="例：價格低"></label>'+
+    '<label class="fld"><span class="lb">左方軸</span><input type="text" id="ax_l" data-k="ax_l" placeholder="例：傳統"></label>'+
+    '<label class="fld"><span class="lb">右方軸</span><input type="text" id="ax_r" data-k="ax_r" placeholder="例：創新"></label></div>'+
     '<div class="map" id="map" role="img" aria-label="定位圖"></div>'+
-    '<div class="lb">圖上的品牌<small>拖曳圓點調整位置,第一個是自己的企劃。</small></div>'+
+    '<div class="lb">圖上的品牌<small>拖曳圓點調整位置，第一個是自己的企劃。</small></div>'+
     '<div class="pts" id="pts"></div><div class="hint"><button class="btn sm" id="addPt" type="button">新增競爭品牌</button></div></section>';
-  h+='<section class="blk"><div class="grid">'+fld(F('posstmt','定位聲明',{rows:3,sub:'對〔目標客群〕而言,〔品牌〕是〔類別〕中最能〔核心利益〕的選擇,因為〔支持理由〕'}))+'</div></section>';
+  h+='<section class="blk"><div class="grid">'+fld(F('posstmt','定位聲明',{rows:3,sub:'對〔目標客群〕而言，〔品牌〕是〔類別〕中最能〔核心利益〕的選擇，因為〔支持理由〕'}))+'</div></section>';
   return h;
 }
 function renderP7(){
@@ -1037,16 +1042,16 @@ function renderOne(){
   '<section class="blk"><h3>3、實施方式(How / Where / When)'+hb('f5.how')+'</h3><div class="grid">'+ta('o_how',6,'時程、地點、執行步驟')+'</div></section>';
 }
 function renderCover(){
-  var h='<div class="kicker">第 15 屆 TBSA 全國大專創新企劃競賽</div><h1>封面與目錄</h1><p class="use">先填寫參賽資料,再依序完成五張表單。每一欄下方會顯示最後編輯的人與時間。</p>';
+  var h='<div class="kicker">第 15 屆 TBSA 全國大專創新企劃競賽</div><h1>封面與目錄</h1><p class="use">先填寫參賽資料，再依序完成五張表單。每一欄下方會顯示最後編輯的人與時間。</p>';
   h+='<section class="blk"><div class="grid g3">'+
     fld(F('c_topic','題目',{line:1}))+fld(F('c_num','參賽編號',{line:1}))+fld(F('c_team','團隊名稱',{line:1}))+'</div></section>';
   h+='<section class="blk"><h3>參賽類別(請勾選)</h3><div class="cats">';
   CATS.forEach(function(c,i){h+='<label class="cat"><input type="checkbox" id="cat'+i+'" data-k="cat'+i+'" data-b="1"><span>【'+c+'】</span></label>'});
   h+='<label class="cat"><input type="checkbox" id="cat_o" data-k="cat_o" data-b="1"><span>其他</span><input type="text" id="cat_other" data-k="cat_other" aria-label="其他類別" placeholder="請填寫"></label></div></section>';
-  h+='<section class="blk"><h3>怎麼用這份表單</h3><div class="verbs">'+TEACH.STEPS.map(function(t,i){return '<span class="pill" style="background:var(--c'+(i+1)+')">'+esc(t.verb)+'</span>'}).join('<span aria-hidden="true">→</span>')+'</div>'+
-    '<ul class="howto"><li><b>漏斗邏輯:</b>發散蒐集情報 → 收斂成策略與目標 → 聚焦到目標顧客 → 展開成具體戰術 → 濃縮成一頁提案。前一張表的產出,就是後一張表的輸入。</li>'+
-    '<li><b>欄位旁的 <span class="hbtn" style="margin:0" aria-hidden="true">?</span>:</b>點開會在側邊顯示怎麼填、引導問題、常見錯誤,以及這格承接自哪裡、輸出到哪裡。想看示範時,可展開「看 IKEA 範例」。</li>'+
-    '<li><b>寫任何一格之前,</b>先問「這格的依據在前面哪一格?」;寫完之後再問「這格會被後面哪一格用到?」</li></ul></section>';
+  h+='<section class="blk"><h3>使用備忘</h3><div class="verbs">'+TEACH.STEPS.map(function(t,i){return '<span class="pill" style="background:var(--c'+(i+1)+')">'+esc(t.verb)+'</span>'}).join('<span aria-hidden="true">→</span>')+'</div>'+
+    '<ul class="howto"><li><b>順序：</b>蒐集情報 → 收斂成策略與目標 → 聚焦目標顧客 → 展開成戰術 → 濃縮成一頁提案。前一張表的結論，就是後一張表的依據。</li>'+
+    '<li><b>欄位旁的 <span class="hbtn" style="margin:0" aria-hidden="true">?</span>:</b>點開看這格的重點、先想的問題、注意事項，以及這格承接自哪裡、輸出到哪裡。想看寫法可以展開「參考：IKEA 範例」。</li>'+
+    '<li><b>寫每一格時，</b>先確認依據在前面哪一格;寫完再確認後面哪一格會用到它。</li></ul></section>';
   h+='<section class="blk"><h3>目錄</h3><div class="toc">';
   STEPS.forEach(function(s,si){
     var p=progress(s);
@@ -1080,7 +1085,7 @@ function renderPage(id,noScroll){
   }
   var o=order(),i=o.indexOf(id);
   h+='<div class="pager"><button class="btn" type="button" '+(i>0?'data-go="'+o[i-1]+'"':'disabled')+'>← 上一步</button><button class="btn pri" type="button" '+(i<o.length-1?'data-go="'+o[i+1]+'"':'disabled')+'>下一步 →</button></div>';
-  if(!CANW)h='<p class="banner">你目前只能檢視,不能編輯。請請擁有者把你設為「可編輯」。</p>'+h;
+  if(!CANW)h='<p class="banner">你目前只能檢視，不能編輯。請請擁有者把你設為「可編輯」。</p>'+h;
   $('#main').innerHTML=h;
   bind();
   updateChecks();
@@ -1158,7 +1163,7 @@ document.addEventListener('click',function(e){
     case 'addPt':var p=pts();p.push({n:'競爭品牌 '+p.length,x:.3,y:.6});drawMap();setField('pts',p);break;
     case 'fillName':if(!S.c_topic){toast('封面還沒有填題目')}else{$('#o_name').value=S.c_topic;setField('o_name',S.c_topic)}break;
     case 'fillCost':var tot=sum();var nc=(S.o_cost?S.o_cost+'\n':'')+'行銷溝通預算合計 '+tot.toLocaleString('zh-TW')+' 元';$('#o_cost').value=nc;autosize($('#o_cost'));setField('o_cost',nc);break;
-    case 'bCopy':copyText(toMarkdown(),'已複製,可貼到 Word 或 Google 文件');break;
+    case 'bCopy':copyText(toMarkdown(),'已複製，可貼到 Word 或 Google 文件');break;
     case 'bNick':editNick();break;
     case 'bNickCancel':renderWhoami();break;
     case 'bNickSave':saveNick($('#nickIn').value).then(function(ok){if(!ok)return;renderWhoami()});break;
@@ -1171,7 +1176,7 @@ document.addEventListener('click',function(e){
       if(DB&&!CANADMIN){toast('共用內容只有編輯者可以清空');break}
       if(t.dataset.arm){
         var old=Object.keys(A);S={};A={};try{localStorage.removeItem(KEY);localStorage.removeItem(KEY+'-by')}catch(x){};
-        if(DB){old.reduce(function(pr,k){return pr.then(function(){return coll.doc(k).delete()})},Promise.resolve()).catch(function(){toast('部分內容清除失敗,請再按一次')})}
+        if(DB){old.reduce(function(pr,k){return pr.then(function(){return coll.doc(k).delete()})},Promise.resolve()).catch(function(){toast('部分內容清除失敗，請再按一次')})}
         renderPage(cur,true);toast('已清空全部內容');t.textContent='清空';delete t.dataset.arm}
       else{t.dataset.arm='1';t.textContent='再按一次確認清空';setTimeout(function(){t.textContent='清空';delete t.dataset.arm},4000)}
       break;
@@ -1186,15 +1191,15 @@ function restore(){
   try{var o=JSON.parse($('#dataBox').value);if(!o||typeof o!=='object')throw 0;
     if(DB){Object.keys(o).forEach(function(k,i){if(isFilled(o[k]))setField(k,o[k],400+i*80)});}else S=o;
     save();renderPage(cur,true);toast('已還原')}
-  catch(e){toast('代碼格式不正確,請重新貼上完整的備份代碼')}
+  catch(e){toast('代碼格式不正確，請重新貼上完整的備份代碼')}
 }
 
 /* ---------- export ---------- */
 function toMarkdown(){
-  var o=[],v=function(k){var t=(S[k]||'').toString().trim();if(!t)return '(未填)';return A[k]&&A[k].by?t+'\n\n_填寫:'+byText(k)+'_':t};
-  o.push('# 第 15 屆 TBSA 全國大專創新企劃競賽','','- 題目:'+v('c_topic'),'- 參賽編號:'+v('c_num'),'- 團隊名稱:'+v('c_team'));
+  var o=[],v=function(k){var t=(S[k]||'').toString().trim();if(!t)return '(未填)';return A[k]&&A[k].by?t+'\n\n_填寫：'+byText(k)+'_':t};
+  o.push('# 第 15 屆 TBSA 全國大專創新企劃競賽','','- 題目：'+v('c_topic'),'- 參賽編號：'+v('c_num'),'- 團隊名稱：'+v('c_team'));
   var cs=CATS.filter(function(_,i){return S['cat'+i]});if(S.cat_o)cs.push('其他'+(S.cat_other?':'+S.cat_other:''));
-  o.push('- 參賽類別:'+(cs.join('、')||'(未選)'),'');
+  o.push('- 參賽類別：'+(cs.join('、')||'(未選)'),'');
   function fields(list){list.forEach(function(f){o.push('**'+f.l+'**','',v(f.k),'')})}
   STEPS.forEach(function(st){
     o.push('## '+st.n+' '+st.t,'');
@@ -1209,7 +1214,7 @@ function toMarkdown(){
         o.push('');
       });
       o.push('**目標市場(Targeting)**','',v('target'),'','**產品或服務的功能 / 特色**','',v('feat'),'','### 市場定位(Positioning)','');
-      o.push('座標軸:上「'+(S.ax_t||'')+'」/ 下「'+(S.ax_b||'')+'」/ 左「'+(S.ax_l||'')+'」/ 右「'+(S.ax_r||'')+'」');
+      o.push('座標軸：上「'+(S.ax_t||'')+'」/ 下「'+(S.ax_b||'')+'」/ 左「'+(S.ax_l||'')+'」/ 右「'+(S.ax_r||'')+'」');
       pts().forEach(function(d){o.push('- '+d.n+':橫 '+Math.round(d.x*100)+'%、縱 '+Math.round((1-d.y)*100)+'%')});
       o.push('','**定位聲明**','',v('posstmt'),'');
     }
@@ -1218,7 +1223,7 @@ function toMarkdown(){
       o.push('### 行銷活動設計','','| 顧客心理程序 | 行動溝通活動 | 成果目標 | 預算 | 備註 |','|---|---|---|---|---|');
       var cl=function(k){return (S[k]||'').toString().replace(/\n/g,'<br>').replace(/\|/g,'/')};
       AIDAS.forEach(function(a,i){o.push('| '+a[0]+' | '+cl('ai'+i+'_act')+' | '+cl('ai'+i+'_goal')+' | '+cl('ai'+i+'_bud')+' | '+cl('ai'+i+'_note')+' |')});
-      o.push('','預算合計:'+sum().toLocaleString('zh-TW')+' 元','');
+      o.push('','預算合計：'+sum().toLocaleString('zh-TW')+' 元','');
     }
     if(st.one){
       o.push('**企劃案名稱**:'+v('o_name'),'');
@@ -1226,7 +1231,7 @@ function toMarkdown(){
     }
   });
   var by=contributors(),ids=Object.keys(by);
-  if(ids.length){o.push('## 填寫紀錄','');ids.sort(function(a,b){return by[b].n-by[a].n}).forEach(function(id){o.push('- '+nameOf(id)+':'+by[id].n+' 欄(' +Object.keys(by[id].steps).join('、')+'),最近編輯 '+fmtAt(by[id].at))});o.push('')}
+  if(ids.length){o.push('## 填寫紀錄','');ids.sort(function(a,b){return by[b].n-by[a].n}).forEach(function(id){o.push('- '+nameOf(id)+':'+by[id].n+' 欄(' +Object.keys(by[id].steps).join('、')+')，最近編輯 '+fmtAt(by[id].at))});o.push('')}
   return o.join('\n');
 }
 
@@ -1242,3 +1247,4 @@ window.addEventListener('hashchange',function(){var x=(location.hash||'').replac
 
 </body>
 </html>
+
